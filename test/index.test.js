@@ -20,6 +20,7 @@ describe('index test', () => {
     it('has methods that need to be extended', () => {
         assert.throws(instance.start, Error, 'not implemented');
         assert.throws(instance.stop, Error, 'not implemented');
+        assert.throws(instance.stream, Error, 'not implemented');
     });
 
     it('can be extended', (done) => {

@@ -43,6 +43,18 @@ class Executor {
         console.error('stop is not implemented');
         throw new Error('not implemented');
     }
+
+    /**
+     * Stop the executor
+     * @method stop
+     * @param {Object} config               Configuration
+     * @param {String} config.buildId       Build id
+     * @param {Response} config.stream      Response object to stream logs to
+     */
+    stream() {
+        console.error('stream is not implemented');
+        throw new Error('not implemented');
+    }
 }
 
 module.exports = Executor;
