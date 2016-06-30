@@ -45,8 +45,8 @@ class Executor {
     }
 
     /**
-     * Stop the executor
-     * @method stop
+     * Stream logs
+     * @method stream
      * @param {Object} config               Configuration
      * @param {String} config.buildId       Build id
      * @param {Response} config.stream      Response object to stream logs to
