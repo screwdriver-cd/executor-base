@@ -17,31 +17,86 @@ describe('index test', () => {
         assert.instanceOf(instance, Executor);
     });
 
-    it('has methods that need to be extended', () => {
-        assert.throws(instance.start, Error, 'not implemented');
-        assert.throws(instance.stop, Error, 'not implemented');
-        assert.throws(instance.stream, Error, 'not implemented');
+    it('start returns an error when not overridden', (done) => {
+        instance.start({}, (err) => {
+            assert.isOk(err, 'error is null');
+            done();
+        });
+    });
+
+    it('start returns an error when not implemented', (done) => {
+        const config = {
+            buildId: 'a',
+            jobId: 'a',
+            pipelineId: 'a',
+            container: 'a',
+            scmUrl: 'a'
+        };
+
+        instance.start(config, (err) => {
+            assert.isOk(err, 'err is null');
+            assert.equal(err.message, 'not implemented');
+            done();
+        });
+    });
+
+    it('stop returns an error when not overridden', (done) => {
+        instance.stop({}, (err) => {
+            assert.isOk(err, 'error is null');
+            done();
+        });
+    });
+
+    it('stop returns an error when not implemented', (done) => {
+        const config = {
+            buildId: 'a',
+            jobId: 'a',
+            pipelineId: 'a',
+            container: 'a',
+            scmUrl: 'a'
+        };
+
+        instance.stop(config, (err) => {
+            assert.isOk(err, 'err is null');
+            assert.equal(err.message, 'not implemented');
+            done();
+        });
+    });
+
+    it('stream returns an error when not overridden', (done) => {
+        instance.stream({}, (err) => {
+            assert.isOk(err, 'error is null');
+            done();
+        });
+    });
+
+    it('stream returns an error when not implemented', (done) => {
+        const config = {
+            buildId: 'a'
+        };
+
+        instance.stream(config, (err) => {
+            assert.isOk(err, 'err is null');
+            assert.equal(err.message, 'not implemented');
+            done();
+        });
     });
 
     it('can be extended', (done) => {
         class Foo extends Executor {
-            get(id, callback) {
-                if (id > 0) {
-                    return callback(null, { id });
-                }
-
-                return process.nextTick(() => {
-                    callback(new Error('invalid id'));
-                });
+            _stream(config, callback) {
+                return callback(null, config);
             }
         }
 
         const bar = new Foo({ foo: 'bar' });
 
         assert.instanceOf(bar, Executor);
-        bar.get(1, (err, data) => {
+        bar.stream({
+            buildId: 'a'
+        }, (err, data) => {
             assert.isNull(err);
-            assert.equal(data.id, 1);
+            assert.equal(data.buildId, 'a');
             done();
         });
     });
