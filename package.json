@@ -1,6 +1,6 @@
 {
   "name": "screwdriver-executor-base",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Base class defining the interface for executor implementations",
   "main": "index.js",
   "scripts": {
@@ -26,7 +26,8 @@
     "Noah Katzman <nbkatzman@gmail.com>",
     "Peter Peterson <jedipetey@gmail.com>",
     "St. John Johnson <st.john.johnson@gmail.com",
-    "Tiffany Kyi <tiffanykyi@gmail.com>"
+    "Tiffany Kyi <tiffanykyi@gmail.com>",
+    "Min Zhang <minzhang@andrew.cmu.edu>"
   ],
   "devDependencies": {
     "chai": "^3.5.0",
@@ -37,5 +38,7 @@
     "eslint-plugin-react": "^5.1.1",
     "jenkins-mocha": "^2.6.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "joi": "^9.0.0"
+  }
 }

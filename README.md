@@ -59,10 +59,13 @@ The stream function is expected to return a readable stream upon success
 2. When the stream is created correctly, `callback(null, stream)`
 
 ## Extending
+To make use of the validation function for start, stop and stream, you need to
+override the `_start`, `_stop`, `_stream` methods.
+
 ```js
 class MyExecutor extends Executor {
     // Implement the interface
-    start(config, callback) {
+    _start(config, callback) {
         if (config.buildId) {
             // do stuff here...
             return callback(null);

@@ -1,5 +1,6 @@
 'use strict';
-/* eslint-disable no-console */
+/* eslint-disable no-underscore-dangle */
+const Joi = require('joi');
 
 class Executor {
     /**
@@ -13,7 +14,7 @@ class Executor {
     }
 
     /**
-     * Start the executor
+     * Validate the config for _start method
      * @method start
      * @param {Object} config               Configuration
      * @param {String} config.buildId       Build id
@@ -21,16 +22,29 @@ class Executor {
      * @param {String} config.pipelineId    Pipeline id
      * @param {String} config.container     Container
      * @param {String} config.scmUrl        Scm url
-     * @param {Function} callback
+     * @param {Function} callback           Function to call when done
      */
-    start() {
-        console.error('start is not implemented');
-        throw new Error('not implemented');
+    start(config, callback) {
+        const schema = Joi.object().keys({
+            buildId: Joi.string().required(),
+            jobId: Joi.string().required(),
+            pipelineId: Joi.string().required(),
+            container: Joi.string().required(),
+            scmUrl: Joi.string().required()
+        });
+
+        const result = Joi.validate(config, schema);
+
+        if (result.error) {
+            return callback(result.error);
+        }
+
+        return this._start(config, callback);
     }
 
     /**
-     * Stop the executor
-     * @method stop
+     * Start the executor
+     * @method _start
      * @param {Object} config               Configuration
      * @param {String} config.buildId       Build id
      * @param {String} config.jobId         Job id
@@ -39,21 +53,84 @@ class Executor {
      * @param {String} config.scmUrl        Scm url
      * @param {Function} callback
      */
-    stop() {
-        console.error('stop is not implemented');
-        throw new Error('not implemented');
+    _start(config, callback) {
+        callback(new Error('not implemented'));
+    }
+
+    /**
+     * Validate the config for _stop method
+     * @method stop
+     * @param {Object} config               Configuration
+     * @param {String} config.buildId       Build id
+     * @param {String} config.jobId         Job id
+     * @param {String} config.pipelineId    Pipeline id
+     * @param {String} config.container     Container
+     * @param {String} config.scmUrl        Scm url
+     * @param {Function} callback           Function to call when done
+     */
+    stop(config, callback) {
+        const schema = Joi.object().keys({
+            buildId: Joi.string().required(),
+            jobId: Joi.string().required(),
+            pipelineId: Joi.string().required(),
+            container: Joi.string().required(),
+            scmUrl: Joi.string().required()
+        });
+
+        const result = Joi.validate(config, schema);
+
+        if (result.error) {
+            return callback(result.error);
+        }
+
+        return this._stop(config, callback);
+    }
+
+    /**
+     * Stop the executor
+     * @method _stop
+     * @param {Object} config               Configuration
+     * @param {String} config.buildId       Build id
+     * @param {String} config.jobId         Job id
+     * @param {String} config.pipelineId    Pipeline id
+     * @param {String} config.container     Container
+     * @param {String} config.scmUrl        Scm url
+     * @param {Function} callback
+     */
+    _stop(config, callback) {
+        callback(new Error('not implemented'));
+    }
+
+    /**
+     * Validate config for _stream method
+     * @method stream
+     * @param {Object} config               Configuration
+     * @param {String} config.buildId       Build id
+     * @param {Function} callback           Function to call when done
+     */
+    stream(config, callback) {
+        const schema = Joi.object().keys({
+            buildId: Joi.string().required()
+        });
+
+        const result = Joi.validate(config, schema);
+
+        if (result.error) {
+            return callback(result.error);
+        }
+
+        return this._stream(config, callback);
     }
 
     /**
      * Stream logs
-     * @method stream
+     * @method _stream
      * @param {Object} config               Configuration
      * @param {String} config.buildId       Build id
-     * @param {Response} config.stream      Response object to stream logs to
+     * @param {Function} callback           Function to call when done
      */
-    stream() {
-        console.error('stream is not implemented');
-        throw new Error('not implemented');
+    _stream(config, callback) {
+        callback(new Error('not implemented'));
     }
 }
 
