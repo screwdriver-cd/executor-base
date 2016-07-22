@@ -1,6 +1,8 @@
 'use strict';
 /* eslint-disable no-underscore-dangle */
 const Joi = require('joi');
+const schema = require('screwdriver-data-schema');
+const executorSchema = schema.plugins.executor;
 
 class Executor {
     /**
@@ -25,15 +27,7 @@ class Executor {
      * @param {Function} callback           Function to call when done
      */
     start(config, callback) {
-        const schema = Joi.object().keys({
-            buildId: Joi.string().required(),
-            jobId: Joi.string().required(),
-            pipelineId: Joi.string().required(),
-            container: Joi.string().required(),
-            scmUrl: Joi.string().required()
-        });
-
-        const result = Joi.validate(config, schema);
+        const result = Joi.validate(config, executorSchema.start);
 
         if (result.error) {
             return callback(result.error);
@@ -62,22 +56,10 @@ class Executor {
      * @method stop
      * @param {Object} config               Configuration
      * @param {String} config.buildId       Build id
-     * @param {String} config.jobId         Job id
-     * @param {String} config.pipelineId    Pipeline id
-     * @param {String} config.container     Container
-     * @param {String} config.scmUrl        Scm url
      * @param {Function} callback           Function to call when done
      */
     stop(config, callback) {
-        const schema = Joi.object().keys({
-            buildId: Joi.string().required(),
-            jobId: Joi.string().required(),
-            pipelineId: Joi.string().required(),
-            container: Joi.string().required(),
-            scmUrl: Joi.string().required()
-        });
-
-        const result = Joi.validate(config, schema);
+        const result = Joi.validate(config, executorSchema.stop);
 
         if (result.error) {
             return callback(result.error);
@@ -91,10 +73,6 @@ class Executor {
      * @method _stop
      * @param {Object} config               Configuration
      * @param {String} config.buildId       Build id
-     * @param {String} config.jobId         Job id
-     * @param {String} config.pipelineId    Pipeline id
-     * @param {String} config.container     Container
-     * @param {String} config.scmUrl        Scm url
      * @param {Function} callback
      */
     _stop(config, callback) {
@@ -109,11 +87,7 @@ class Executor {
      * @param {Function} callback           Function to call when done
      */
     stream(config, callback) {
-        const schema = Joi.object().keys({
-            buildId: Joi.string().required()
-        });
-
-        const result = Joi.validate(config, schema);
+        const result = Joi.validate(config, executorSchema.stream);
 
         if (result.error) {
             return callback(result.error);

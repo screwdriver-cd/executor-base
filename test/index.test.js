@@ -1,16 +1,46 @@
 'use strict';
 const assert = require('chai').assert;
-const Executor = require('../index');
+const mockery = require('mockery');
+const Joi = require('joi');
 
 describe('index test', () => {
     let instance;
+    let schemaMock;
+    let Executor;
+
+    before(() => {
+        mockery.enable({
+            useCleanCache: true,
+            warnOnUnregistered: false
+        });
+    });
 
     beforeEach(() => {
+        schemaMock = {
+            plugins: {
+                executor: {
+                    start: Joi.object().required(),
+                    stop: Joi.object().required(),
+                    stream: Joi.object().required()
+                }
+            }
+        };
+        mockery.registerMock('screwdriver-data-schema', schemaMock);
+
+        // eslint-disable-next-line global-require
+        Executor = require('../index');
+
         instance = new Executor({ foo: 'bar' });
     });
 
     afterEach(() => {
         instance = null;
+        mockery.deregisterAll();
+        mockery.resetCache();
+    });
+
+    after(() => {
+        mockery.disable();
     });
 
     it('can create a Executor base class', () => {
@@ -19,6 +49,13 @@ describe('index test', () => {
 
     it('start returns an error when not overridden', (done) => {
         instance.start({}, (err) => {
+            assert.isOk(err, 'error is null');
+            done();
+        });
+    });
+
+    it('start returns an error when fails validation', (done) => {
+        instance.start('blah', (err) => {
             assert.isOk(err, 'error is null');
             done();
         });
@@ -47,6 +84,13 @@ describe('index test', () => {
         });
     });
 
+    it('stop returns an error when fails validation', (done) => {
+        instance.stop('blah', (err) => {
+            assert.isOk(err, 'error is null');
+            done();
+        });
+    });
+
     it('stop returns an error when not implemented', (done) => {
         const config = {
             buildId: 'a',
@@ -65,6 +109,13 @@ describe('index test', () => {
 
     it('stream returns an error when not overridden', (done) => {
         instance.stream({}, (err) => {
+            assert.isOk(err, 'error is null');
+            done();
+        });
+    });
+
+    it('stream returns an error when fails validation', (done) => {
+        instance.stream('blah', (err) => {
             assert.isOk(err, 'error is null');
             done();
         });
