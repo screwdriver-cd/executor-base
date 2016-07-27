@@ -30,6 +30,7 @@ npm install screwdriver-executor-base
 | :-------------   | :---- | :-------------|
 | config        | Object | Configuration Object |
 | config.buildId | String | The unique ID for a build |
+| config.jobName | String | The name of the Job |
 | config.jobId | String | The unique ID for a job |
 | config.pipelineId | String | The unique ID for a pipeline |
 | config.container | String | Container for the build to run in |

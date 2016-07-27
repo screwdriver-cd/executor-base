@@ -19,9 +19,10 @@ class Executor {
      * Validate the config for _start method
      * @method start
      * @param {Object} config               Configuration
-     * @param {String} config.buildId       Build id
-     * @param {String} config.jobId         Job id
      * @param {String} config.pipelineId    Pipeline id
+     * @param {String} config.jobId         Job id
+     * @param {String} config.jobName       Name of the Job
+     * @param {String} config.buildId       Build id
      * @param {String} config.container     Container
      * @param {String} config.scmUrl        Scm url
      * @param {Function} callback           Function to call when done
@@ -36,17 +37,6 @@ class Executor {
         return this._start(config, callback);
     }
 
-    /**
-     * Start the executor
-     * @method _start
-     * @param {Object} config               Configuration
-     * @param {String} config.buildId       Build id
-     * @param {String} config.jobId         Job id
-     * @param {String} config.pipelineId    Pipeline id
-     * @param {String} config.container     Container
-     * @param {String} config.scmUrl        Scm url
-     * @param {Function} callback
-     */
     _start(config, callback) {
         callback(new Error('not implemented'));
     }
@@ -68,13 +58,6 @@ class Executor {
         return this._stop(config, callback);
     }
 
-    /**
-     * Stop the executor
-     * @method _stop
-     * @param {Object} config               Configuration
-     * @param {String} config.buildId       Build id
-     * @param {Function} callback
-     */
     _stop(config, callback) {
         callback(new Error('not implemented'));
     }
@@ -96,13 +79,6 @@ class Executor {
         return this._stream(config, callback);
     }
 
-    /**
-     * Stream logs
-     * @method _stream
-     * @param {Object} config               Configuration
-     * @param {String} config.buildId       Build id
-     * @param {Function} callback           Function to call when done
-     */
     _stream(config, callback) {
         callback(new Error('not implemented'));
     }
