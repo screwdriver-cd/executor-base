@@ -19,12 +19,10 @@ class Executor {
      * Validate the config for _start method
      * @method start
      * @param {Object} config               Configuration
-     * @param {String} config.pipelineId    Pipeline id
-     * @param {String} config.jobId         Job id
-     * @param {String} config.jobName       Name of the Job
-     * @param {String} config.buildId       Build id
-     * @param {String} config.container     Container
-     * @param {String} config.scmUrl        Scm url
+     * @param {String} config.buildId       Unique ID for a build
+     * @param {String} config.container     Container for the build to run in
+     * @param {String} config.apiUri        Screwdriver's API
+     * @param {String} config.token         JWT to act on behalf of the build
      * @param {Function} callback           Function to call when done
      */
     start(config, callback) {

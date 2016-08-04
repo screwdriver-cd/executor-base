@@ -1,4 +1,4 @@
-# executor base
+# Executor Base
 [![Version][npm-image]][npm-url] ![Downloads][downloads-image] [![Build Status][wercker-image]][wercker-url] [![Open Issues][issues-image]][issues-url] [![Dependency Status][daviddm-image]][daviddm-url] ![License][license-image]
 
 > Base class defining the interface for executor implementations
@@ -14,7 +14,7 @@ This means:
 1. Mounting the job-tools container as a volume to $MOUNT_POINT on another container
 2. Running the `launch` script as the entry point to the task container
 ```
-$MOUNT_POINT/launch ${git_org} ${git_repo} ${git_branch} ${job_name}
+SD_TOKEN=${token} $MOUNT_POINT/launch --api-uri ${api_uri} ${build_id}
 ```
 
 ## Usage
@@ -30,11 +30,9 @@ npm install screwdriver-executor-base
 | :-------------   | :---- | :-------------|
 | config        | Object | Configuration Object |
 | config.buildId | String | The unique ID for a build |
-| config.jobName | String | The name of the Job |
-| config.jobId | String | The unique ID for a job |
-| config.pipelineId | String | The unique ID for a pipeline |
 | config.container | String | Container for the build to run in |
-| config.scmUrl | String | The scmUrl to checkout |
+| config.apiUri | String | Screwdriver's API |
+| config.token | String | JWT to act on behalf of the build |
 | callback | Function | Callback for when task has been created |
 
 ##### Expected Outcome
@@ -81,10 +79,9 @@ class MyExecutor extends Executor {
 const executor = new MyExecutor({});
 executor.start({
     buildId: '4b8d9b530d2e5e297b4f470d5b0a6e1310d29c5e',
-    jobId: '50dc14f719cdc2c9cb1fb0e49dd2acc4cf6189a0',
-    pipelineId: 'ccc49349d3cffbd12ea9e3d41521480b4aa5de5f',
     container: 'node:4',
-    scmUrl: 'git@github.com:screwdriver-cd/data-model.git#master'
+    apiUri: 'http://localhost:8080',
+    token: 'abcdefg'
 }, (err) => {
     // do something...
 });
