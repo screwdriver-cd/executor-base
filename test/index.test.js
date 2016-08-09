@@ -47,6 +47,10 @@ describe('index test', () => {
         assert.instanceOf(instance, Executor);
     });
 
+    it('contains a stats method', () => {
+        assert.deepEqual(instance.stats(), {});
+    });
+
     it('start returns an error when not overridden', (done) => {
         instance.start({}, (err) => {
             assert.isOk(err, 'error is null');

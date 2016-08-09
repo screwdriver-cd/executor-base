@@ -57,6 +57,10 @@ The stream function is expected to return a readable stream upon success
 1. When an error occurs, `callback(err)`
 2. When the stream is created correctly, `callback(null, stream)`
 
+#### Stats
+##### Expected Outcome
+The `stats` function is expected to return an object of statistics
+
 ## Extending
 To make use of the validation function for start, stop and stream, you need to
 override the `_start`, `_stop`, `_stream` methods.
