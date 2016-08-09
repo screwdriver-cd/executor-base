@@ -80,6 +80,15 @@ class Executor {
     _stream(config, callback) {
         callback(new Error('not implemented'));
     }
+
+    /**
+     * Return statistics on the executor
+     * @method stats
+     * @return {Object} object           Hash containing metrics for the executor
+     */
+    stats() {
+        return {};
+    }
 }
 
 module.exports = Executor;
