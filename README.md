@@ -42,28 +42,13 @@ The start function is expected to create a [task] in the execution engine.
 1. When an error occurs, `callback(err)`
 2. When the task is created correctly, `callback(null)`
 
-#### Stream
-##### Required Parameters
-| Parameter        |  Type  | Description |
-| :-------------   | :----- | :-------------|
-| config           | Object | Configuration Object |
-| config.buildId   | String | The unique ID for a build |
-| callback         | Function | Callback for when stream has been created |
-
-##### Expected Outcome
-The stream function is expected to return a readable stream upon success
-
-##### Expected Callback
-1. When an error occurs, `callback(err)`
-2. When the stream is created correctly, `callback(null, stream)`
-
 #### Stats
 ##### Expected Outcome
 The `stats` function is expected to return an object of statistics
 
 ## Extending
-To make use of the validation function for start, stop and stream, you need to
-override the `_start`, `_stop`, `_stream` methods.
+To make use of the validation function for start and stop, you need to
+override the `_start` and `_stop` methods.
 
 ```js
 class MyExecutor extends Executor {

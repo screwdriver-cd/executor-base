@@ -20,8 +20,7 @@ describe('index test', () => {
             plugins: {
                 executor: {
                     start: Joi.object().required(),
-                    stop: Joi.object().required(),
-                    stream: Joi.object().required()
+                    stop: Joi.object().required()
                 }
             }
         };
@@ -111,35 +110,9 @@ describe('index test', () => {
         });
     });
 
-    it('stream returns an error when not overridden', (done) => {
-        instance.stream({}, (err) => {
-            assert.isOk(err, 'error is null');
-            done();
-        });
-    });
-
-    it('stream returns an error when fails validation', (done) => {
-        instance.stream('blah', (err) => {
-            assert.isOk(err, 'error is null');
-            done();
-        });
-    });
-
-    it('stream returns an error when not implemented', (done) => {
-        const config = {
-            buildId: 'a'
-        };
-
-        instance.stream(config, (err) => {
-            assert.isOk(err, 'err is null');
-            assert.equal(err.message, 'not implemented');
-            done();
-        });
-    });
-
     it('can be extended', (done) => {
         class Foo extends Executor {
-            _stream(config, callback) {
+            _stop(config, callback) {
                 return callback(null, config);
             }
         }
@@ -147,7 +120,7 @@ describe('index test', () => {
         const bar = new Foo({ foo: 'bar' });
 
         assert.instanceOf(bar, Executor);
-        bar.stream({
+        bar.stop({
             buildId: 'a'
         }, (err, data) => {
             assert.isNull(err);
