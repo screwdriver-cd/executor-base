@@ -1,6 +1,6 @@
 {
   "name": "screwdriver-executor-base",
-  "version": "3.0.0",
+  "version": "4.0.0",
   "description": "Base class defining the interface for executor implementations",
   "main": "index.js",
   "scripts": {
@@ -31,7 +31,7 @@
   ],
   "devDependencies": {
     "chai": "^3.5.0",
-    "eslint": "^3.2.2",
+    "eslint": "^3.4.0",
     "eslint-config-screwdriver": "^2.0.0",
     "eslint-plugin-import": "^1.12.0",
     "jenkins-mocha": "^3.0.0",
@@ -39,6 +39,6 @@
   },
   "dependencies": {
     "joi": "^9.0.0",
-    "screwdriver-data-schema": "^8.0.0"
+    "screwdriver-data-schema": "^10.0.0"
   }
 }

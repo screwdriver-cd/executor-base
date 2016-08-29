@@ -61,27 +61,6 @@ class Executor {
     }
 
     /**
-     * Validate config for _stream method
-     * @method stream
-     * @param {Object} config               Configuration
-     * @param {String} config.buildId       Build id
-     * @param {Function} callback           Function to call when done
-     */
-    stream(config, callback) {
-        const result = Joi.validate(config, executorSchema.stream);
-
-        if (result.error) {
-            return callback(result.error);
-        }
-
-        return this._stream(config, callback);
-    }
-
-    _stream(config, callback) {
-        callback(new Error('not implemented'));
-    }
-
-    /**
      * Return statistics on the executor
      * @method stats
      * @return {Object} object           Hash containing metrics for the executor
