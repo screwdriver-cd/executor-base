@@ -1,8 +1,25 @@
 'use strict';
 /* eslint-disable no-underscore-dangle */
 const Joi = require('joi');
-const schema = require('screwdriver-data-schema');
-const executorSchema = schema.plugins.executor;
+const dataSchema = require('screwdriver-data-schema');
+const executorSchema = dataSchema.plugins.executor;
+
+/**
+ * Validate the config using the schema
+ * @method  validate
+ * @param  {Object}    config       Configuration
+ * @param  {Object}    schema       Joi object used for validation
+ * @return {Promise}
+ */
+function validate(config, schema) {
+    const result = Joi.validate(config, schema);
+
+    if (result.error) {
+        return Promise.reject(result.error);
+    }
+
+    return Promise.resolve(config);
+}
 
 class Executor {
     /**
@@ -16,48 +33,54 @@ class Executor {
     }
 
     /**
-     * Validate the config for _start method
+     * Start a new build
      * @method start
      * @param {Object} config               Configuration
      * @param {String} config.buildId       Unique ID for a build
      * @param {String} config.container     Container for the build to run in
      * @param {String} config.apiUri        Screwdriver's API
      * @param {String} config.token         JWT to act on behalf of the build
-     * @param {Function} callback           Function to call when done
+     * @return {Promise}
      */
-    start(config, callback) {
-        const result = Joi.validate(config, executorSchema.start);
-
-        if (result.error) {
-            return callback(result.error);
-        }
-
-        return this._start(config, callback);
+    start(config) {
+        return validate(config, executorSchema.start)
+            .then(validConfig => this._start(validConfig));
     }
 
-    _start(config, callback) {
-        callback(new Error('not implemented'));
+    _start() {
+        return Promise.reject('Not implemented');
     }
 
     /**
-     * Validate the config for _stop method
+     * Stop a running or finished build
      * @method stop
      * @param {Object} config               Configuration
-     * @param {String} config.buildId       Build id
-     * @param {Function} callback           Function to call when done
+     * @param {String} config.buildId       Unique ID for a build
+     * @return {Promise}
      */
-    stop(config, callback) {
-        const result = Joi.validate(config, executorSchema.stop);
-
-        if (result.error) {
-            return callback(result.error);
-        }
-
-        return this._stop(config, callback);
+    stop(config) {
+        return validate(config, executorSchema.stop)
+            .then(validConfig => this._stop(validConfig));
     }
 
-    _stop(config, callback) {
-        callback(new Error('not implemented'));
+    _stop() {
+        return Promise.reject('Not implemented');
+    }
+
+    /**
+     * Get the status of a build
+     * @method status
+     * @param {Object} config               Configuration
+     * @param {String} config.buildId       Unique ID for a build
+     * @return {Promise}
+     */
+    status(config) {
+        return validate(config, executorSchema.status)
+            .then(validConfig => this._status(validConfig));
+    }
+
+    _status() {
+        return Promise.reject('Not implemented');
     }
 
     /**

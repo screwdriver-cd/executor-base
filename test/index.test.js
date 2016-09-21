@@ -20,7 +20,8 @@ describe('index test', () => {
             plugins: {
                 executor: {
                     start: Joi.object().required(),
-                    stop: Joi.object().required()
+                    stop: Joi.object().required(),
+                    status: Joi.object().required()
                 }
             }
         };
@@ -50,67 +51,67 @@ describe('index test', () => {
         assert.deepEqual(instance.stats(), {});
     });
 
-    it('start returns an error when not overridden', (done) => {
-        instance.start({}, (err) => {
-            assert.isOk(err, 'error is null');
-            done();
-        });
-    });
+    it('start returns an error when not overridden', () => (
+        instance.start({})
+            .then(() => {
+                throw new Error('Oh no');
+            }, (err) => {
+                assert.isOk(err, 'err is null');
+                assert.equal(err, 'Not implemented');
+            })
+    ));
 
-    it('start returns an error when fails validation', (done) => {
-        instance.start('blah', (err) => {
-            assert.isOk(err, 'error is null');
-            done();
-        });
-    });
+    it('start returns an error when fails validation', () => (
+        instance.start('blah')
+            .then(() => {
+                throw new Error('Oh no');
+            }, (err) => {
+                assert.isOk(err, 'error is null');
+                assert.equal(err, 'ValidationError: "value" must be an object');
+            })
+    ));
 
-    it('start returns an error when not implemented', (done) => {
-        const config = {
-            buildId: 'a',
-            jobId: 'a',
-            pipelineId: 'a',
-            container: 'a',
-            scmUrl: 'a'
-        };
+    it('stop returns an error when not overridden', () => (
+        instance.stop({})
+            .then(() => {
+                throw new Error('Oh no');
+            }, (err) => {
+                assert.isOk(err, 'error is null');
+                assert.equal(err, 'Not implemented');
+            })
+    ));
 
-        instance.start(config, (err) => {
-            assert.isOk(err, 'err is null');
-            assert.equal(err.message, 'not implemented');
-            done();
-        });
-    });
+    it('stop returns an error when fails validation', () => (
+        instance.stop('blah')
+            .then(() => {
+                throw new Error('Oh no');
+            }, (err) => {
+                assert.isOk(err, 'error is null');
+                assert.equal(err, 'ValidationError: "value" must be an object');
+            })
+    ));
 
-    it('stop returns an error when not overridden', (done) => {
-        instance.stop({}, (err) => {
-            assert.isOk(err, 'error is null');
-            done();
-        });
-    });
+    it('status returns an error when not overridden', () => (
+        instance.status({})
+            .then(() => {
+                throw new Error('Oh no');
+            }, (err) => {
+                assert.isOk(err, 'error is null');
+                assert.equal(err, 'Not implemented');
+            })
+    ));
 
-    it('stop returns an error when fails validation', (done) => {
-        instance.stop('blah', (err) => {
-            assert.isOk(err, 'error is null');
-            done();
-        });
-    });
+    it('status returns an error when fails validation', () => (
+        instance.status('blah')
+            .then(() => {
+                throw new Error('Oh no');
+            }, (err) => {
+                assert.isOk(err, 'error is null');
+                assert.equal(err, 'ValidationError: "value" must be an object');
+            })
+    ));
 
-    it('stop returns an error when not implemented', (done) => {
-        const config = {
-            buildId: 'a',
-            jobId: 'a',
-            pipelineId: 'a',
-            container: 'a',
-            scmUrl: 'a'
-        };
-
-        instance.stop(config, (err) => {
-            assert.isOk(err, 'err is null');
-            assert.equal(err.message, 'not implemented');
-            done();
-        });
-    });
-
-    it('can be extended', (done) => {
+    it('can be extended', () => {
         class Foo extends Executor {
             _stop(config, callback) {
                 return callback(null, config);
@@ -125,7 +126,6 @@ describe('index test', () => {
         }, (err, data) => {
             assert.isNull(err);
             assert.equal(data.buildId, 'a');
-            done();
         });
     });
 });
