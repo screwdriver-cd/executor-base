@@ -33,14 +33,38 @@ npm install screwdriver-executor-base
 | config.container | String | Container for the build to run in |
 | config.apiUri | String | Screwdriver's API |
 | config.token | String | JWT to act on behalf of the build |
-| callback | Function | Callback for when task has been created |
 
 ##### Expected Outcome
 The start function is expected to create a [task] in the execution engine.
 
-##### Expected Callback
-1. When an error occurs, `callback(err)`
-2. When the task is created correctly, `callback(null)`
+##### Expected Return
+A Promise that resolves if the task is created correctly, or rejects if it fails.
+
+#### Stop
+##### Required Parameters
+| Parameter        | Type  |  Description |
+| :-------------   | :---- | :-------------|
+| config        | Object | Configuration Object |
+| config.buildId | String | The unique ID for a build |
+
+##### Expected Outcome
+The stop function is expected to stop/cleanup a [task] in the execution engine.
+
+##### Expected Return
+A Promise that resolves if the task is cleaned up correctly, or rejects if it fails.
+
+#### Status
+##### Required Parameters
+| Parameter        | Type  |  Description |
+| :-------------   | :---- | :-------------|
+| config        | Object | Configuration Object |
+| config.buildId | String | The unique ID for a build |
+
+##### Expected Outcome
+The status function is expected to get a human readable status of a [task] in the execution engine.
+
+##### Expected Return
+A Promise that resolves with the current build status, or rejects if it fails.
 
 #### Stats
 ##### Expected Outcome
@@ -53,15 +77,13 @@ override the `_start` and `_stop` methods.
 ```js
 class MyExecutor extends Executor {
     // Implement the interface
-    _start(config, callback) {
+    _start(config) {
         if (config.buildId) {
             // do stuff here...
-            return callback(null);
+            return Promise.resolve(null);
         }
 
-        return process.nextTick(() => {
-            callback(new Error('Error starting executor'));
-        });
+        return Promise.reject(new Error('Error starting executor'));
     }
 }
 
