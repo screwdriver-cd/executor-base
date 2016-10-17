@@ -1,4 +1,5 @@
 'use strict';
+
 /* eslint-disable no-underscore-dangle */
 const Joi = require('joi');
 const dataSchema = require('screwdriver-data-schema');
