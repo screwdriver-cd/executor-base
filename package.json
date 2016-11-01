@@ -1,6 +1,6 @@
 {
   "name": "screwdriver-executor-base",
-  "version": "5.0.0",
+  "version": "5.1.0",
   "description": "Base class defining the interface for executor implementations",
   "main": "index.js",
   "scripts": {
@@ -39,6 +39,6 @@
   },
   "dependencies": {
     "joi": "^9.0.0",
-    "screwdriver-data-schema": "^14.0.0"
+    "screwdriver-data-schema": "^15.0.3"
   }
 }
