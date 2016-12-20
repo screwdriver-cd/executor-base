@@ -114,18 +114,18 @@ describe('index test', () => {
 
     it('can be extended', () => {
         class Foo extends Executor {
-            _stop(config, callback) {
-                return callback(null, config);
+            _stop(config) {
+                return Promise.resolve(config);
             }
         }
 
         const bar = new Foo({ foo: 'bar' });
 
         assert.instanceOf(bar, Executor);
-        bar.stop({
+
+        return bar.stop({
             buildId: 'a'
-        }, (err, data) => {
-            assert.isNull(err);
+        }).then((data) => {
             assert.equal(data.buildId, 'a');
         });
     });
