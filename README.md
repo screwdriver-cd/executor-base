@@ -112,10 +112,10 @@ Code licensed under the BSD 3-Clause license. See LICENSE file for terms.
 [npm-url]: https://npmjs.org/package/screwdriver-executor-base
 [downloads-image]: https://img.shields.io/npm/dt/screwdriver-executor-base.svg
 [license-image]: https://img.shields.io/npm/l/screwdriver-executor-base.svg
-[issues-image]: https://img.shields.io/github/issues/screwdriver-cd/executor-base.svg
-[issues-url]: https://github.com/screwdriver-cd/executor-base/issues
-[status-image]: https://cd.screwdriver.cd/pipelines/7f37d84f39a154c40b2c592050aa5b7c85ca5619/badge
-[status-url]: https://cd.screwdriver.cd/pipelines/7f37d84f39a154c40b2c592050aa5b7c85ca5619
+[issues-image]: https://img.shields.io/github/issues/screwdriver-cd/screwdriver.svg
+[issues-url]: https://github.com/screwdriver-cd/screwdriver/issues
+[status-image]: https://cd.screwdriver.cd/pipelines/25/badge
+[status-url]: https://cd.screwdriver.cd/pipelines/25
 [daviddm-image]: https://david-dm.org/screwdriver-cd/executor-base.svg?theme=shields.io
 [daviddm-url]: https://david-dm.org/screwdriver-cd/executor-base
 [task]: https://github.com/screwdriver-cd/data-schema/blob/master/model/task.js
