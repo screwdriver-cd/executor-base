@@ -37,9 +37,10 @@ class Executor {
      * Start a new build
      * @method start
      * @param {Object} config               Configuration
+     * @param {Object} [config.annotations] Optional key/value object
+     * @param {String} config.apiUri        Screwdriver's API
      * @param {String} config.buildId       Unique ID for a build
      * @param {String} config.container     Container for the build to run in
-     * @param {String} config.apiUri        Screwdriver's API
      * @param {String} config.token         JWT to act on behalf of the build
      * @return {Promise}
      */

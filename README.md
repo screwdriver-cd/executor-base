@@ -29,9 +29,10 @@ npm install screwdriver-executor-base
 | Parameter        | Type  |  Description |
 | :-------------   | :---- | :-------------|
 | config        | Object | Configuration Object |
+| config.annotations | Object | Optional key/value object |
+| config.apiUri | String | Screwdriver's API |
 | config.buildId | String | The unique ID for a build |
 | config.container | String | Container for the build to run in |
-| config.apiUri | String | Screwdriver's API |
 | config.token | String | JWT to act on behalf of the build |
 
 ##### Expected Outcome
