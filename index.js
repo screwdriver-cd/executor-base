@@ -50,7 +50,7 @@ class Executor {
     }
 
     _start() {
-        return Promise.reject('Not implemented');
+        return Promise.reject(new Error('Not implemented'));
     }
 
     /**
@@ -66,7 +66,7 @@ class Executor {
     }
 
     _stop() {
-        return Promise.reject('Not implemented');
+        return Promise.reject(new Error('Not implemented'));
     }
 
     /**
@@ -82,7 +82,7 @@ class Executor {
     }
 
     _status() {
-        return Promise.reject('Not implemented');
+        return Promise.reject(new Error('Not implemented'));
     }
 
     /**
