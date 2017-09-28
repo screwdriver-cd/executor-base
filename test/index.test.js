@@ -58,7 +58,7 @@ describe('index test', () => {
                 throw new Error('Oh no');
             }, (err) => {
                 assert.isOk(err, 'err is null');
-                assert.equal(err, 'Not implemented');
+                assert.equal(err.message, 'Not implemented');
             })
     ));
 
@@ -78,7 +78,7 @@ describe('index test', () => {
                 throw new Error('Oh no');
             }, (err) => {
                 assert.isOk(err, 'error is null');
-                assert.equal(err, 'Not implemented');
+                assert.equal(err.message, 'Not implemented');
             })
     ));
 
@@ -98,7 +98,7 @@ describe('index test', () => {
                 throw new Error('Oh no');
             }, (err) => {
                 assert.isOk(err, 'error is null');
-                assert.equal(err, 'Not implemented');
+                assert.equal(err.message, 'Not implemented');
             })
     ));
 
