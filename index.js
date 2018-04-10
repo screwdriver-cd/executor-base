@@ -7,19 +7,19 @@ const executorSchema = dataSchema.plugins.executor;
 
 /**
  * Validate the config using the schema
- * @method  validate
+ * @async  validate
  * @param  {Object}    config       Configuration
  * @param  {Object}    schema       Joi object used for validation
  * @return {Promise}
  */
-function validate(config, schema) {
+async function validate(config, schema) {
     const result = Joi.validate(config, schema);
 
     if (result.error) {
-        return Promise.reject(result.error);
+        throw result.error;
     }
 
-    return Promise.resolve(config);
+    return config;
 }
 
 class Executor {
@@ -36,12 +36,12 @@ class Executor {
     /**
      * Start a new build
      * @method start
-     * @param {Object} config               Configuration
-     * @param {Object} [config.annotations] Optional key/value object
-     * @param {String} config.apiUri        Screwdriver's API
-     * @param {String} config.buildId       Unique ID for a build
-     * @param {String} config.container     Container for the build to run in
-     * @param {String} config.token         JWT to act on behalf of the build
+     * @param  {Object} config               Configuration
+     * @param  {Object} [config.annotations] Optional key/value object
+     * @param  {String} config.apiUri        Screwdriver's API
+     * @param  {String} config.buildId       Unique ID for a build
+     * @param  {String} config.container     Container for the build to run in
+     * @param  {String} config.token         JWT to act on behalf of the build
      * @return {Promise}
      */
     start(config) {
@@ -49,15 +49,15 @@ class Executor {
             .then(validConfig => this._start(validConfig));
     }
 
-    _start() {
-        return Promise.reject(new Error('Not implemented'));
+    async _start() {
+        throw new Error('Not implemented');
     }
 
     /**
      * Stop a running or finished build
      * @method stop
-     * @param {Object} config               Configuration
-     * @param {String} config.buildId       Unique ID for a build
+     * @param  {Object} config               Configuration
+     * @param  {String} config.buildId       Unique ID for a build
      * @return {Promise}
      */
     stop(config) {
@@ -65,15 +65,15 @@ class Executor {
             .then(validConfig => this._stop(validConfig));
     }
 
-    _stop() {
-        return Promise.reject(new Error('Not implemented'));
+    async _stop() {
+        throw new Error('Not implemented');
     }
 
     /**
      * Get the status of a build
      * @method status
-     * @param {Object} config               Configuration
-     * @param {String} config.buildId       Unique ID for a build
+     * @param  {Object} config               Configuration
+     * @param  {String} config.buildId       Unique ID for a build
      * @return {Promise}
      */
     status(config) {
@@ -81,8 +81,8 @@ class Executor {
             .then(validConfig => this._status(validConfig));
     }
 
-    _status() {
-        return Promise.reject(new Error('Not implemented'));
+    async _status() {
+        throw new Error('Not implemented');
     }
 
     /**
