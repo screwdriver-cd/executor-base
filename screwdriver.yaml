@@ -3,7 +3,6 @@ shared:
 
 jobs:
     main:
-        requires: [~pr, ~commit]
         steps:
             - install: npm install
             - test: npm test
@@ -12,7 +11,6 @@ jobs:
             - ~commit
 
     publish:
-        requires: main
         template: screwdriver-cd/semantic-release
         secrets:
             # Publishing to NPM
