@@ -80,8 +80,8 @@ class Executor {
       * @return {Promise}
       */
     startPeriodic(config) {
-        return validate(config, executorSchema.start)
-            .then(validConfig => this._start(validConfig));
+        return validate(config, executorSchema.startPeriodic)
+            .then(validConfig => this._startPeriodic(validConfig));
     }
 
     async _startPeriodic() {
@@ -96,7 +96,7 @@ class Executor {
      * @return {Promise}
      */
     stopPeriodic(config) {
-        return validate(config, executorSchema.stop)
+        return validate(config, executorSchema.stopPeriodic)
             .then(validConfig => this._stopPeriodic(validConfig));
     }
 
