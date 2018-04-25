@@ -22,6 +22,8 @@ describe('index test', () => {
                 executor: {
                     start: Joi.object().required(),
                     stop: Joi.object().required(),
+                    startPeriodic: Joi.object().required(),
+                    stopPeriodic: Joi.object().required(),
                     status: Joi.object().required()
                 }
             }
@@ -84,6 +86,46 @@ describe('index test', () => {
 
     it('stop returns an error when fails validation', () => (
         instance.stop('blah')
+            .then(() => {
+                throw new Error('Oh no');
+            }, (err) => {
+                assert.isOk(err, 'error is null');
+                assert.equal(err, 'ValidationError: "value" must be an object');
+            })
+    ));
+
+    it('startPeriodic returns an error when not overridden', () => (
+        instance.startPeriodic({})
+            .then(() => {
+                throw new Error('Oh no');
+            }, (err) => {
+                assert.isOk(err, 'err is null');
+                assert.equal(err.message, 'Not implemented');
+            })
+    ));
+
+    it('startPeriodic returns an error when fails validation', () => (
+        instance.startPeriodic('blah')
+            .then(() => {
+                throw new Error('Oh no');
+            }, (err) => {
+                assert.isOk(err, 'error is null');
+                assert.equal(err, 'ValidationError: "value" must be an object');
+            })
+    ));
+
+    it('stopPeriodic returns an error when not overridden', () => (
+        instance.stopPeriodic({})
+            .then(() => {
+                throw new Error('Oh no');
+            }, (err) => {
+                assert.isOk(err, 'error is null');
+                assert.equal(err.message, 'Not implemented');
+            })
+    ));
+
+    it('stopPeriodic returns an error when fails validation', () => (
+        instance.stopPeriodic('blah')
             .then(() => {
                 throw new Error('Oh no');
             }, (err) => {

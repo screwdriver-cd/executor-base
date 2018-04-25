@@ -70,6 +70,41 @@ class Executor {
     }
 
     /**
+      * Starts a new periodic build in an executor
+      * @method _startPeriodic
+      * @param {Object} config               Configuration
+      * @param {Object} config.pipeline      Pipeline of the job
+      * @param {Object} config.job           Job object to create periodic builds for
+      * @param {Object} config.tokenGen      Function to generate JWT from username, scope and scmContext
+      * @param {Boolean}config.update        Boolean to determine if updating existing periodic build
+      * @return {Promise}
+      */
+    startPeriodic(config) {
+        return validate(config, executorSchema.start)
+            .then(validConfig => this._start(validConfig));
+    }
+
+    async _startPeriodic() {
+        throw new Error('Not implemented');
+    }
+
+    /**
+     * Stops a previously scheduled periodic build in an executor
+     * @async  _stopPeriodic
+     * @param  {Object}  config        Configuration
+     * @param  {Integer} config.jobId  ID of the job with periodic builds
+     * @return {Promise}
+     */
+    stopPeriodic(config) {
+        return validate(config, executorSchema.stop)
+            .then(validConfig => this._stopPeriodic(validConfig));
+    }
+
+    async _stopPeriodic() {
+        throw new Error('Not implemented');
+    }
+
+    /**
      * Get the status of a build
      * @method status
      * @param  {Object} config               Configuration
