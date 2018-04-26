@@ -104,16 +104,6 @@ describe('index test', () => {
             })
     ));
 
-    it('startPeriodic returns an error when fails validation', () => (
-        instance.startPeriodic('blah')
-            .then(() => {
-                throw new Error('Oh no');
-            }, (err) => {
-                assert.isOk(err, 'error is null');
-                assert.equal(err, 'ValidationError: "value" must be an object');
-            })
-    ));
-
     it('stopPeriodic returns an error when not overridden', () => (
         instance.stopPeriodic({})
             .then(() => {
@@ -121,16 +111,6 @@ describe('index test', () => {
             }, (err) => {
                 assert.isOk(err, 'error is null');
                 assert.equal(err.message, 'Not implemented');
-            })
-    ));
-
-    it('stopPeriodic returns an error when fails validation', () => (
-        instance.stopPeriodic('blah')
-            .then(() => {
-                throw new Error('Oh no');
-            }, (err) => {
-                assert.isOk(err, 'error is null');
-                assert.equal(err, 'ValidationError: "value" must be an object');
             })
     ));
 
