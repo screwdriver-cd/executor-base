@@ -72,11 +72,12 @@ class Executor {
     /**
       * Starts a new periodic build in an executor
       * @method _startPeriodic
-      * @param {Object} config               Configuration
+      * @param {Object}  config               Configuration
+      * @param {Boolean} triggerBuild         Flag for triggering a build event
       * @return {Promise}
       */
-    startPeriodic(config) {
-        return this._startPeriodic(config);
+    startPeriodic(config, triggerBuild) {
+        return this._startPeriodic(config, triggerBuild);
     }
 
     async _startPeriodic() {
