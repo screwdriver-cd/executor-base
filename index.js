@@ -70,6 +70,34 @@ class Executor {
     }
 
     /**
+      * Starts a new periodic build in an executor
+      * @method _startPeriodic
+      * @param {Object} config               Configuration
+      * @return {Promise}
+      */
+    startPeriodic(config) {
+        return this._startPeriodic(config);
+    }
+
+    async _startPeriodic() {
+        throw new Error('Not implemented');
+    }
+
+    /**
+     * Stops a previously scheduled periodic build in an executor
+     * @async  _stopPeriodic
+     * @param  {Object}  config        Configuration
+     * @return {Promise}
+     */
+    stopPeriodic(config) {
+        return this._stopPeriodic(config);
+    }
+
+    async _stopPeriodic() {
+        throw new Error('Not implemented');
+    }
+
+    /**
      * Get the status of a build
      * @method status
      * @param  {Object} config               Configuration
