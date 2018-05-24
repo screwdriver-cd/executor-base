@@ -4,6 +4,8 @@
 const Joi = require('joi');
 const dataSchema = require('screwdriver-data-schema');
 const executorSchema = dataSchema.plugins.executor;
+const request = require('requestretry');
+const DEFAULT_BUILD_TIMEOUT = 90; // in minutes
 
 /**
  * Validate the config using the schema
@@ -120,6 +122,41 @@ class Executor {
      */
     stats() {
         return {};
+    }
+
+    /**
+     * Get a build JWT via API with temporal JWT set build JWT to config file
+     * @method exchangeTokenForBuild
+     * @param  {Object}  config          A configuration object
+     * @param  {String}  config.apiUrl   Base URL for Screwdriver API
+     * @param  {String}  config.buildId  Build ID
+     * @param  {String}  config.token    Temporal JWT
+     * @param  {String}  buildTimeout    Build timeout value which will be JWT expires time
+     */
+    async exchangeTokenForBuild(config, buildTimeout = DEFAULT_BUILD_TIMEOUT) {
+        try {
+            if (isFinite(buildTimeout) === false) {
+                throw new Error(`Ivalid buildTimeout value: ${buildTimeout} `);
+            }
+
+            const options = {
+                uri: `${config.apiUri}/v4/builds/${config.buildId}/token`,
+                method: 'POST',
+                body: { buildTimeout },
+                headers: { Authorization: `Bearer ${config.token}` },
+                strictSSL: false,
+                json: true
+            };
+
+            const response = await request(options);
+
+            if (response.statusCode !== 200) {
+                throw new Error(`Failed to exchenge build token: ${JSON.stringify(response.body)}`);
+            }
+            config.token = response.body.token;
+        } catch (err) {
+            throw new Error(err);
+        }
     }
 }
 
