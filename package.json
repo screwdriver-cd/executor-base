@@ -41,11 +41,12 @@
     "eslint": "^4.19.1",
     "eslint-config-screwdriver": "^3.0.0",
     "jenkins-mocha": "^4.0.0",
-    "mockery": "^2.0.0"
+    "mockery": "^2.0.0",
+    "sinon": "^2.3.1"
   },
   "dependencies": {
     "joi": "^13.0.0",
-    "screwdriver-data-schema": "^18.20.0",
-    "requestretry": "^1.12.2"
+    "request": "^2.87.0",
+    "screwdriver-data-schema": "^18.20.0"
   }
 }

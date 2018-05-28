@@ -1,6 +1,7 @@
 'use strict';
 
 const { assert } = require('chai');
+const sinon = require('sinon');
 const mockery = require('mockery');
 const Joi = require('joi');
 
@@ -8,6 +9,7 @@ describe('index test', () => {
     let instance;
     let schemaMock;
     let Executor;
+    let requestMock;
 
     before(() => {
         mockery.enable({
@@ -24,10 +26,14 @@ describe('index test', () => {
                     stop: Joi.object().required(),
                     startPeriodic: Joi.object().required(),
                     stopPeriodic: Joi.object().required(),
-                    status: Joi.object().required()
+                    status: Joi.object().required(),
+                    exchangeTokenForBuild: Joi.object().required()
                 }
             }
         };
+        requestMock = sinon.stub();
+        mockery.registerMock('request', requestMock);
+
         mockery.registerMock('screwdriver-data-schema', schemaMock);
 
         // eslint-disable-next-line global-require
@@ -149,6 +155,70 @@ describe('index test', () => {
             buildId: 'a'
         }).then((data) => {
             assert.equal(data.buildId, 'a');
+        });
+    });
+
+    describe('exchangeTokenForBuild', () => {
+        let postConfig;
+        let options;
+        let buildTimeout;
+        let fakeResponse;
+
+        beforeEach(() => {
+            postConfig = {
+                buildId: 111,
+                apiUri: 'http://dummy.com',
+                token: 'dummyTemporalToken'
+            };
+            buildTimeout = 90;
+            options = {
+                uri: `${postConfig.apiUri}/v4/builds/${postConfig.buildId}/token`,
+                method: 'POST',
+                body: { buildTimeout },
+                headers: { Authorization: `Bearer ${postConfig.token}` },
+                strictSSL: false,
+                json: true
+            };
+            fakeResponse = {
+                statusCode: 200,
+                body: {
+                    token: 'dummyBuildToken'
+                }
+            };
+        });
+
+        it('It succeeds to exchange temporal JWT to build JWT', async () => {
+            requestMock.withArgs(options).resolves(fakeResponse);
+
+            await instance.exchangeTokenForBuild(postConfig, buildTimeout).then(() => {
+                assert.equal(postConfig.token, fakeResponse.body.token);
+            });
+        });
+
+        it('It returns error if buildTimeout value is invalid', async () => {
+            buildTimeout = 'aaa';
+            const returnMessage = `Error: Invalid buildTimeout value: ${buildTimeout}`;
+
+            await instance.exchangeTokenForBuild(postConfig, buildTimeout).then(() => {
+                throw new Error('did not fail');
+            }).catch((err) => {
+                assert.equal(err.message, returnMessage);
+            });
+        });
+
+        it('It returns error if response code is not 200', async () => {
+            fakeResponse.statusCode = 409;
+
+            const returnMessage =
+            `Error: Failed to exchange build token: ${JSON.stringify(fakeResponse.body)}`;
+
+            requestMock.withArgs(options).resolves(fakeResponse);
+
+            await instance.exchangeTokenForBuild(postConfig, buildTimeout).then(() => {
+                throw new Error('did not fail');
+            }).catch((err) => {
+                assert.equal(err.message, returnMessage);
+            });
         });
     });
 });
