@@ -187,7 +187,7 @@ describe('index test', () => {
             };
         });
 
-        it('It succeeds to exchange temporal JWT to build JWT', async () => {
+        it('succeeds to exchange temporal JWT to build JWT', async () => {
             requestMock.withArgs(options).resolves(fakeResponse);
 
             await instance.exchangeTokenForBuild(postConfig, buildTimeout).then(() => {
@@ -195,7 +195,7 @@ describe('index test', () => {
             });
         });
 
-        it('It returns error if buildTimeout value is invalid', async () => {
+        it('returns error if buildTimeout value is invalid', async () => {
             buildTimeout = 'aaa';
             const returnMessage = `Error: Invalid buildTimeout value: ${buildTimeout}`;
 
@@ -206,7 +206,7 @@ describe('index test', () => {
             });
         });
 
-        it('It returns error if response code is not 200', async () => {
+        it('returns error if response code is not 200', async () => {
             fakeResponse.statusCode = 409;
 
             const returnMessage =
