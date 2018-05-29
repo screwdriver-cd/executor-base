@@ -46,7 +46,7 @@
   },
   "dependencies": {
     "joi": "^13.0.0",
-    "request": "^2.87.0",
+    "requestretry": "^1.13.0",
     "screwdriver-data-schema": "^18.20.0"
   }
 }

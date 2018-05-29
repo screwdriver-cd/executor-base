@@ -4,7 +4,7 @@
 const Joi = require('joi');
 const dataSchema = require('screwdriver-data-schema');
 const executorSchema = dataSchema.plugins.executor;
-const request = require('request');
+const request = require('requestretry');
 const DEFAULT_BUILD_TIMEOUT = 90; // in minutes
 
 /**

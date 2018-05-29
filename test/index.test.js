@@ -32,7 +32,7 @@ describe('index test', () => {
             }
         };
         requestMock = sinon.stub();
-        mockery.registerMock('request', requestMock);
+        mockery.registerMock('requestretry', requestMock);
 
         mockery.registerMock('screwdriver-data-schema', schemaMock);
 
