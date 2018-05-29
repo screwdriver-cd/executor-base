@@ -4,6 +4,7 @@ const { assert } = require('chai');
 const sinon = require('sinon');
 const mockery = require('mockery');
 const Joi = require('joi');
+const DEFAULT_BUILD_TIMEOUT = 90; // in minutes
 
 describe('index test', () => {
     let instance;
@@ -170,7 +171,7 @@ describe('index test', () => {
                 apiUri: 'http://dummy.com',
                 token: 'dummyTemporalToken'
             };
-            buildTimeout = 90;
+            buildTimeout = 150;
             options = {
                 uri: `${postConfig.apiUri}/v4/builds/${postConfig.buildId}/token`,
                 method: 'POST',
@@ -191,6 +192,15 @@ describe('index test', () => {
             requestMock.withArgs(options).resolves(fakeResponse);
 
             await instance.exchangeTokenForBuild(postConfig, buildTimeout).then((buildToken) => {
+                assert.equal(fakeResponse.body.token, buildToken);
+            });
+        });
+
+        it('succeeds to exchange temporal JWT to build JWT without buildTimeout args', async () => {
+            options.body.buildTimeout = DEFAULT_BUILD_TIMEOUT;
+            requestMock.withArgs(options).resolves(fakeResponse);
+
+            await instance.exchangeTokenForBuild(postConfig).then((buildToken) => {
                 assert.equal(fakeResponse.body.token, buildToken);
             });
         });
