@@ -190,8 +190,8 @@ describe('index test', () => {
         it('succeeds to exchange temporal JWT to build JWT', async () => {
             requestMock.withArgs(options).resolves(fakeResponse);
 
-            await instance.exchangeTokenForBuild(postConfig, buildTimeout).then(() => {
-                assert.equal(postConfig.token, fakeResponse.body.token);
+            await instance.exchangeTokenForBuild(postConfig, buildTimeout).then((buildToken) => {
+                assert.equal(fakeResponse.body.token, buildToken);
             });
         });
 

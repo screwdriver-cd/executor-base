@@ -152,7 +152,8 @@ class Executor {
         if (response.statusCode !== 200) {
             throw new Error(`Failed to exchange build token: ${JSON.stringify(response.body)}`);
         }
-        config.token = response.body.token;
+
+        return response.body.token;
     }
 }
 
