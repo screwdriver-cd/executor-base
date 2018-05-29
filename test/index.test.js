@@ -197,11 +197,11 @@ describe('index test', () => {
 
         it('returns error if buildTimeout value is invalid', async () => {
             buildTimeout = 'aaa';
-            const returnMessage = `Error: Invalid buildTimeout value: ${buildTimeout}`;
+            const returnMessage = `Invalid buildTimeout value: ${buildTimeout}`;
 
             await instance.exchangeTokenForBuild(postConfig, buildTimeout).then(() => {
                 throw new Error('did not fail');
-            }).catch((err) => {
+            }, (err) => {
                 assert.equal(err.message, returnMessage);
             });
         });
@@ -210,13 +210,13 @@ describe('index test', () => {
             fakeResponse.statusCode = 409;
 
             const returnMessage =
-            `Error: Failed to exchange build token: ${JSON.stringify(fakeResponse.body)}`;
+            `Failed to exchange build token: ${JSON.stringify(fakeResponse.body)}`;
 
             requestMock.withArgs(options).resolves(fakeResponse);
 
             await instance.exchangeTokenForBuild(postConfig, buildTimeout).then(() => {
                 throw new Error('did not fail');
-            }).catch((err) => {
+            }, (err) => {
                 assert.equal(err.message, returnMessage);
             });
         });

@@ -134,29 +134,25 @@ class Executor {
      * @param  {String}  buildTimeout    Build timeout value which will be JWT expires time
      */
     async exchangeTokenForBuild(config, buildTimeout = DEFAULT_BUILD_TIMEOUT) {
-        try {
-            if (isFinite(buildTimeout) === false) {
-                throw new Error(`Invalid buildTimeout value: ${buildTimeout}`);
-            }
-
-            const options = {
-                uri: `${config.apiUri}/v4/builds/${config.buildId}/token`,
-                method: 'POST',
-                body: { buildTimeout },
-                headers: { Authorization: `Bearer ${config.token}` },
-                strictSSL: false,
-                json: true
-            };
-
-            const response = await request(options);
-
-            if (response.statusCode !== 200) {
-                throw new Error(`Failed to exchange build token: ${JSON.stringify(response.body)}`);
-            }
-            config.token = response.body.token;
-        } catch (err) {
-            throw new Error(err);
+        if (isFinite(buildTimeout) === false) {
+            throw new Error(`Invalid buildTimeout value: ${buildTimeout}`);
         }
+
+        const options = {
+            uri: `${config.apiUri}/v4/builds/${config.buildId}/token`,
+            method: 'POST',
+            body: { buildTimeout },
+            headers: { Authorization: `Bearer ${config.token}` },
+            strictSSL: false,
+            json: true
+        };
+
+        const response = await request(options);
+
+        if (response.statusCode !== 200) {
+            throw new Error(`Failed to exchange build token: ${JSON.stringify(response.body)}`);
+        }
+        config.token = response.body.token;
     }
 }
 
