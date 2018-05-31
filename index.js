@@ -125,13 +125,14 @@ class Executor {
     }
 
     /**
-     * Get build JWT with temporal JWT using API and replace config.token
+     * Get JWT for build by using temporal JWT via API
      * @method exchangeTokenForBuild
      * @param  {Object}  config          A configuration object
      * @param  {String}  config.apiUrl   Base URL for Screwdriver API
      * @param  {String}  config.buildId  Build ID
      * @param  {String}  config.token    Temporal JWT
      * @param  {String}  buildTimeout    Build timeout value which will be JWT expires time
+     * @return {String}  token           JWT for build
      */
     async exchangeTokenForBuild(config, buildTimeout = DEFAULT_BUILD_TIMEOUT) {
         if (isFinite(buildTimeout) === false) {
