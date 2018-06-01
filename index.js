@@ -132,7 +132,7 @@ class Executor {
      * @param  {String}  config.buildId  Build ID
      * @param  {String}  config.token    Temporal JWT
      * @param  {String}  buildTimeout    Build timeout value which will be JWT expires time
-     * @return {String}  token           JWT for build
+     * @return {Promise}
      */
     async exchangeTokenForBuild(config, buildTimeout = DEFAULT_BUILD_TIMEOUT) {
         if (isFinite(buildTimeout) === false) {
@@ -144,7 +144,7 @@ class Executor {
             method: 'POST',
             body: { buildTimeout },
             headers: { Authorization: `Bearer ${config.token}` },
-            strictSSL: false,
+            strictSSL: true,
             json: true
         };
 
