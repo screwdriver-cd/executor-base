@@ -168,7 +168,7 @@ describe('index test', () => {
         beforeEach(() => {
             postConfig = {
                 buildId: 111,
-                apiUri: 'http://dummy.com',
+                apiUri: 'https://dummy.com',
                 token: 'dummyTemporalToken'
             };
             buildTimeout = 150;
@@ -177,7 +177,7 @@ describe('index test', () => {
                 method: 'POST',
                 body: { buildTimeout },
                 headers: { Authorization: `Bearer ${postConfig.token}` },
-                strictSSL: false,
+                strictSSL: true,
                 json: true
             };
             fakeResponse = {
