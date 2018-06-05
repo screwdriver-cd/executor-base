@@ -33,7 +33,7 @@ npm install screwdriver-executor-base
 | config.apiUri | String | Screwdriver's API |
 | config.buildId | String | The unique ID for a build |
 | config.container | String | Container for the build to run in |
-| config.token | String | JWT to act on behalf of the build |
+| config.token | String | Temporary JWT which Executor must exchange with API to get JWT which can act on behalf of the build |
 
 ##### Expected Outcome
 The start function is expected to create a [task] in the execution engine.
@@ -71,6 +71,20 @@ A Promise that resolves with the current build status, or rejects if it fails.
 ##### Expected Outcome
 The `stats` function is expected to return an object of statistics
 
+#### Status
+##### Required Parameters
+| Parameter        | Type  |  Description |
+| :-------------   | :---- | :-------------|
+| config        | Object | Configuration Object |
+| config.token | String | Temporary JWT for a build |
+| buildTimeout | Number | Build timeout in minutes |
+
+##### Expected Outcome
+The `exchangeTokenForBuild` function will call API to exchange temporary build JWT with actual build JWT.
+
+##### Expected Return
+A Promise which resolves to actual build JWT
+
 ## Extending
 To make use of the validation function for start and stop, you need to
 override the `_start` and `_stop` methods.
@@ -80,8 +94,10 @@ class MyExecutor extends Executor {
     // Implement the interface
     _start(config) {
         if (config.buildId) {
-            // do stuff here...
-            return Promise.resolve(null);
+            return this.exchangeTokenForBuild(config.token, buildTimeout).then(buildToken => {
+                // do stuff here...
+                return Promise.resolve(null);
+            });
         }
 
         return Promise.reject(new Error('Error starting executor'));
