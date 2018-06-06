@@ -5,6 +5,7 @@ const Joi = require('joi');
 const dataSchema = require('screwdriver-data-schema');
 const executorSchema = dataSchema.plugins.executor;
 const request = require('requestretry');
+const jwt = require('jsonwebtoken');
 const DEFAULT_BUILD_TIMEOUT = 90; // in minutes
 
 /**
@@ -22,6 +23,18 @@ async function validate(config, schema) {
     }
 
     return config;
+}
+
+/**
+ * Check if the scope of jwt is temporal or not
+ * @async  isTemporalJwt
+ * @param  {String}  token Jwt
+ * @return {Boolean}
+ */
+function isTemporalJwt(token) {
+    const decoded = jwt.decode(token);
+
+    return decoded.scope.includes('temporal');
 }
 
 class Executor {
@@ -135,6 +148,10 @@ class Executor {
      * @return {Promise}
      */
     async exchangeTokenForBuild(config, buildTimeout = DEFAULT_BUILD_TIMEOUT) {
+        if (!isTemporalJwt(config.token)) {
+            return config.token;
+        }
+
         if (isFinite(buildTimeout) === false) {
             throw new Error(`Invalid buildTimeout value: ${buildTimeout}`);
         }

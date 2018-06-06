@@ -4,6 +4,7 @@ const { assert } = require('chai');
 const sinon = require('sinon');
 const mockery = require('mockery');
 const Joi = require('joi');
+const jwt = require('jsonwebtoken');
 const DEFAULT_BUILD_TIMEOUT = 90; // in minutes
 
 describe('index test', () => {
@@ -164,12 +165,14 @@ describe('index test', () => {
         let options;
         let buildTimeout;
         let fakeResponse;
+        let token;
 
         beforeEach(() => {
+            token = jwt.sign({ scope: ['temporal'] }, 'socmPrivateKey');
             postConfig = {
                 buildId: 111,
                 apiUri: 'https://dummy.com',
-                token: 'dummyTemporalToken'
+                token
             };
             buildTimeout = 150;
             options = {
@@ -202,6 +205,15 @@ describe('index test', () => {
 
             await instance.exchangeTokenForBuild(postConfig).then((buildToken) => {
                 assert.equal(fakeResponse.body.token, buildToken);
+            });
+        });
+
+        it('do not exchange and returns token as it is if it is already build JWT', async () => {
+            token = jwt.sign({ scope: ['build'] }, 'socmPrivateKey');
+            postConfig.token = token;
+
+            await instance.exchangeTokenForBuild(postConfig).then((buildToken) => {
+                assert.equal(postConfig.token, buildToken);
             });
         });
 
