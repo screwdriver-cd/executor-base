@@ -168,7 +168,7 @@ describe('index test', () => {
         let token;
 
         beforeEach(() => {
-            token = jwt.sign({ scope: ['temporal'] }, 'socmPrivateKey');
+            token = jwt.sign({ scope: ['temporal'] }, 'dummyPrivateKey');
             postConfig = {
                 buildId: 111,
                 apiUri: 'https://dummy.com',
@@ -208,8 +208,8 @@ describe('index test', () => {
             });
         });
 
-        it('do not exchange and returns token as it is if it is already build JWT', async () => {
-            token = jwt.sign({ scope: ['build'] }, 'socmPrivateKey');
+        it('does not exchange and return token as it is if it is already build JWT', async () => {
+            token = jwt.sign({ scope: ['build'] }, 'dummyPrivateKey');
             postConfig.token = token;
 
             await instance.exchangeTokenForBuild(postConfig).then((buildToken) => {

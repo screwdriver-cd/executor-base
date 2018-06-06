@@ -148,6 +148,7 @@ class Executor {
      * @return {Promise}
      */
     async exchangeTokenForBuild(config, buildTimeout = DEFAULT_BUILD_TIMEOUT) {
+        // Use token directly if the scope is already 'build' (#1030)
         if (!isTemporalJwt(config.token)) {
             return config.token;
         }
