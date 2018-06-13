@@ -6,6 +6,7 @@ const mockery = require('mockery');
 const Joi = require('joi');
 const jwt = require('jsonwebtoken');
 const DEFAULT_BUILD_TIMEOUT = 90; // in minutes
+const DEFAULT_BUILD_TIMEOUT_BUFFER = 30; // in minutes
 
 describe('index test', () => {
     let instance;
@@ -164,6 +165,7 @@ describe('index test', () => {
         let postConfig;
         let options;
         let buildTimeout;
+        let buildTimeoutWithBuffer;
         let fakeResponse;
         let token;
 
@@ -175,10 +177,11 @@ describe('index test', () => {
                 token
             };
             buildTimeout = 150;
+            buildTimeoutWithBuffer = buildTimeout + DEFAULT_BUILD_TIMEOUT_BUFFER;
             options = {
                 uri: `${postConfig.apiUri}/v4/builds/${postConfig.buildId}/token`,
                 method: 'POST',
-                body: { buildTimeout },
+                body: { buildTimeout: buildTimeoutWithBuffer },
                 headers: { Authorization: `Bearer ${postConfig.token}` },
                 strictSSL: true,
                 json: true
@@ -200,7 +203,7 @@ describe('index test', () => {
         });
 
         it('succeeds to exchange temporal JWT to build JWT without buildTimeout args', async () => {
-            options.body.buildTimeout = DEFAULT_BUILD_TIMEOUT;
+            options.body.buildTimeout = DEFAULT_BUILD_TIMEOUT + DEFAULT_BUILD_TIMEOUT_BUFFER;
             requestMock.withArgs(options).resolves(fakeResponse);
 
             await instance.exchangeTokenForBuild(postConfig).then((buildToken) => {
