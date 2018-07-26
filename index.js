@@ -4,10 +4,6 @@
 const Joi = require('joi');
 const dataSchema = require('screwdriver-data-schema');
 const executorSchema = dataSchema.plugins.executor;
-const request = require('requestretry');
-const jwt = require('jsonwebtoken');
-const DEFAULT_BUILD_TIMEOUT = 90; // in minutes
-const DEFAULT_BUILD_TIMEOUT_BUFFER = 30; // in minutes
 
 /**
  * Validate the config using the schema
@@ -24,18 +20,6 @@ async function validate(config, schema) {
     }
 
     return config;
-}
-
-/**
- * Check if the scope of jwt is temporal or not
- * @async  isTemporalJwt
- * @param  {String}  token Jwt
- * @return {Boolean}
- */
-function isTemporalJwt(token) {
-    const decoded = jwt.decode(token);
-
-    return decoded.scope.includes('temporal');
 }
 
 class Executor {
@@ -136,44 +120,6 @@ class Executor {
      */
     stats() {
         return {};
-    }
-
-    /**
-     * Get JWT for build by using temporal JWT via API
-     * @method exchangeTokenForBuild
-     * @param  {Object}  config          A configuration object
-     * @param  {String}  config.apiUrl   Base URL for Screwdriver API
-     * @param  {String}  config.buildId  Build ID
-     * @param  {String}  config.token    Temporal JWT
-     * @param  {String}  buildTimeout    Build timeout value which will be JWT expires time
-     * @return {Promise}
-     */
-    async exchangeTokenForBuild(config, buildTimeout = DEFAULT_BUILD_TIMEOUT) {
-        // Use token directly if the scope is already 'build' (#1030)
-        if (!isTemporalJwt(config.token)) {
-            return config.token;
-        }
-
-        if (isFinite(buildTimeout) === false) {
-            throw new Error(`Invalid buildTimeout value: ${buildTimeout}`);
-        }
-
-        const options = {
-            uri: `${config.apiUri}/v4/builds/${config.buildId}/token`,
-            method: 'POST',
-            body: { buildTimeout: buildTimeout + DEFAULT_BUILD_TIMEOUT_BUFFER },
-            headers: { Authorization: `Bearer ${config.token}` },
-            strictSSL: true,
-            json: true
-        };
-
-        const response = await request(options);
-
-        if (response.statusCode !== 200) {
-            throw new Error(`Failed to exchange build token: ${JSON.stringify(response.body)}`);
-        }
-
-        return response.body.token;
     }
 }
 
