@@ -134,6 +134,21 @@ describe('index test', () => {
             })
     ));
 
+    it('parseAnnotations returns a parsed object', () => {
+        const parsed = instance.parseAnnotations({
+            'beta.screwdriver.cd/cpu': 'HIGH',
+            'beta.screwdriver.cd/ram': 'LOW',
+            'screwdriver.cd/disk': 'HIGH',
+            'invald.screwdriver.cd': 'invalid'
+        });
+
+        assert.deepEqual(parsed, {
+            cpu: 'HIGH',
+            ram: 'LOW',
+            disk: 'HIGH'
+        });
+    });
+
     it('can be extended', () => {
         class Foo extends Executor {
             _stop(config) {
