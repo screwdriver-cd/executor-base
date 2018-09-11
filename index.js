@@ -4,6 +4,16 @@
 const Joi = require('joi');
 const dataSchema = require('screwdriver-data-schema');
 const executorSchema = dataSchema.plugins.executor;
+const ANNOTATIONS = [
+    'screwdriver.cd/cpu',
+    'screwdriver.cd/ram',
+    'screwdriver.cd/disk',
+    'screwdriver.cd/timeout',
+    'screwdriver.cd/executor',
+    'screwdriver.cd/buildPeriodically',
+    'screwdriver.cd/repoManifest'
+];
+const annotationRe = /screwdriver.cd\/(\w+)/;
 
 /**
  * Validate the config using the schema
@@ -120,6 +130,26 @@ class Executor {
      */
     stats() {
         return {};
+    }
+
+    /**
+     * Parsed annotations object
+     * @method parseAnnotations
+     * @return {Object} object           Object contains parsed annotations
+     */
+    parseAnnotations(annotations) {
+        const parsedAnnotations = {};
+
+        Object.keys(annotations).forEach((key) => {
+            const parsedKey = key.replace(/^beta./, '');
+
+            if (ANNOTATIONS.includes(parsedKey)) {
+                // First group will be the part after slash, e.g. cpu, ram, disk
+                parsedAnnotations[parsedKey.match(annotationRe)[1]] = annotations[key];
+            }
+        });
+
+        return parsedAnnotations;
     }
 }
 
