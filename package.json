@@ -46,6 +46,6 @@
   "dependencies": {
     "joi": "^13.0.0",
     "jsonwebtoken": "^8.2.2",
-    "screwdriver-data-schema": "^18.20.0"
+    "screwdriver-data-schema": "^18.37.0"
   }
 }
