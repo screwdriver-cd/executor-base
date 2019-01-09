@@ -37,15 +37,15 @@
     }
   },
   "devDependencies": {
-    "chai": "^3.5.0",
+    "chai": "^4.2.0",
     "eslint": "^4.19.1",
     "eslint-config-screwdriver": "^3.0.0",
-    "jenkins-mocha": "^4.0.0",
-    "mockery": "^2.0.0"
+    "jenkins-mocha": "^6.0.0",
+    "mockery": "^2.1.0"
   },
   "dependencies": {
-    "joi": "^13.0.0",
+    "joi": "^13.7.0",
     "jsonwebtoken": "^8.2.2",
-    "screwdriver-data-schema": "^18.37.0"
+    "screwdriver-data-schema": "^18.38.0"
   }
 }
