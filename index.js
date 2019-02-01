@@ -8,6 +8,7 @@ const ANNOTATIONS = [
     'screwdriver.cd/cpu',
     'screwdriver.cd/ram',
     'screwdriver.cd/disk',
+    'screwdriver.cd/diskSpeed',
     'screwdriver.cd/timeout',
     'screwdriver.cd/executor',
     'screwdriver.cd/buildPeriodically',
