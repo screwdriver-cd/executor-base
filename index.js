@@ -110,34 +110,6 @@ class Executor {
     }
 
     /**
-      * Starts a new frozen build in an executor
-      * @method _startFrozen
-      * @param {Object} config               Configuration
-      * @return {Promise}
-      */
-    startFrozen(config) {
-        return this._startFrozen(config);
-    }
-
-    async _startFrozen() {
-        throw new Error('Not implemented');
-    }
-
-    /**
-     * Stops a previously scheduled frozen build in an executor
-     * @async  _stopFrozen
-     * @param  {Object}  config        Configuration
-     * @return {Promise}
-     */
-    stopFrozen(config) {
-        return this._stopFrozen(config);
-    }
-
-    async _stopFrozen() {
-        throw new Error('Not implemented');
-    }
-
-    /**
      * Get the status of a build
      * @method status
      * @param  {Object} config               Configuration
