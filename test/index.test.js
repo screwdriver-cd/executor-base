@@ -24,6 +24,8 @@ describe('index test', () => {
                     stop: Joi.object().required(),
                     startPeriodic: Joi.object().required(),
                     stopPeriodic: Joi.object().required(),
+                    startFrozen: Joi.object().required(),
+                    stopFrozen: Joi.object().required(),
                     status: Joi.object().required()
                 }
             }
@@ -106,6 +108,26 @@ describe('index test', () => {
 
     it('stopPeriodic returns an error when not overridden', () => (
         instance.stopPeriodic({})
+            .then(() => {
+                throw new Error('Oh no');
+            }, (err) => {
+                assert.isOk(err, 'error is null');
+                assert.equal(err.message, 'Not implemented');
+            })
+    ));
+
+    it('startFrozen returns an error when not overridden', () => (
+        instance.startFrozen({})
+            .then(() => {
+                throw new Error('Oh no');
+            }, (err) => {
+                assert.isOk(err, 'err is null');
+                assert.equal(err.message, 'Not implemented');
+            })
+    ));
+
+    it('stopFrozen returns an error when not overridden', () => (
+        instance.stopFrozen({})
             .then(() => {
                 throw new Error('Oh no');
             }, (err) => {
