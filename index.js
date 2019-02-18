@@ -12,7 +12,8 @@ const ANNOTATIONS = [
     'screwdriver.cd/timeout',
     'screwdriver.cd/executor',
     'screwdriver.cd/buildPeriodically',
-    'screwdriver.cd/repoManifest'
+    'screwdriver.cd/repoManifest',
+    'screwdriver.cd/dedicated'
 ];
 const annotationRe = /screwdriver.cd\/(\w+)/;
 
