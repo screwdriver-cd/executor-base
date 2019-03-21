@@ -12,7 +12,10 @@ const ANNOTATIONS = [
     'screwdriver.cd/timeout',
     'screwdriver.cd/executor',
     'screwdriver.cd/buildPeriodically',
-    'screwdriver.cd/repoManifest'
+    'screwdriver.cd/repoManifest',
+    'screwdriver.cd/dockerEnabled',
+    'screwdriver.cd/dockerCpu',
+    'screwdriver.cd/dockerRam'
 ];
 const annotationRe = /screwdriver.cd\/(\w+)/;
 
