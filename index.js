@@ -15,7 +15,8 @@ const ANNOTATIONS = [
     'screwdriver.cd/repoManifest',
     'screwdriver.cd/dockerEnabled',
     'screwdriver.cd/dockerCpu',
-    'screwdriver.cd/dockerRam'
+    'screwdriver.cd/dockerRam',
+    'screwdriver.cd/nodeLabel'
 ];
 const annotationRe = /screwdriver.cd\/(\w+)/;
 

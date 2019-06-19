@@ -161,13 +161,15 @@ describe('index test', () => {
             'beta.screwdriver.cd/cpu': 'HIGH',
             'beta.screwdriver.cd/ram': 'LOW',
             'screwdriver.cd/disk': 'HIGH',
+            'screwdriver.cd/nodeLabel': 'foo-label',
             'invald.screwdriver.cd': 'invalid'
         });
 
         assert.deepEqual(parsed, {
             cpu: 'HIGH',
             ram: 'LOW',
-            disk: 'HIGH'
+            disk: 'HIGH',
+            nodeLabel: 'foo-label'
         });
     });
 
