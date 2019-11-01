@@ -158,6 +158,18 @@ class Executor {
     }
 
     /**
+     * Clean up any processing tasks
+     * @method cleanUp
+     */
+    async cleanUp() {
+        await this._cleanUp();
+    }
+
+    async _cleanUp() {
+        // no-op in case no implemented in extenders
+    }
+
+    /**
      * Return statistics on the executor
      * @method stats
      * @return {Object} object           Hash containing metrics for the executor

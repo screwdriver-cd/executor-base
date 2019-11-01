@@ -156,6 +156,13 @@ describe('index test', () => {
             })
     ));
 
+    it('cleanUp does not returns error when not overridden', () => (
+        instance.cleanUp()
+            .then(() => Promise.resolve(), (err) => {
+                assert.isOk(err, 'error is null');
+            })
+    ));
+
     it('parseAnnotations returns a parsed object', () => {
         const parsed = instance.parseAnnotations({
             'beta.screwdriver.cd/cpu': 'HIGH',
