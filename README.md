@@ -85,9 +85,19 @@ The `exchangeTokenForBuild` function will call API to exchange temporary build J
 ##### Expected Return
 A Promise which resolves to actual build JWT
 
+
+#### CleanUp
+##### Expected Outcome
+The cleanUp function is expected to handle any housekeeping operations like closing connections, queues during the SIGTERM event.
+Default is no-op
+
+##### Expected Return
+A Promise that resolves or rejects.
+
+
 ## Extending
 To make use of the validation function for start and stop, you need to
-override the `_start` and `_stop` methods.
+override the `_start` , `_stop` and `_cleanUp` methods.
 
 ```js
 class MyExecutor extends Executor {
