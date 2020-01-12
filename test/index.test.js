@@ -156,6 +156,20 @@ describe('index test', () => {
             })
     ));
 
+    it('startTimer does not returns error when not overridden', () => (
+        instance.startTimer()
+            .then(() => Promise.resolve(), (err) => {
+                assert.isOk(err, 'error is null');
+            })
+    ));
+
+    it('stopTimer does not returns error when not overridden', () => (
+        instance.stopTimer()
+            .then(() => Promise.resolve(), (err) => {
+                assert.isOk(err, 'error is null');
+            })
+    ));
+
     it('cleanUp does not returns error when not overridden', () => (
         instance.cleanUp()
             .then(() => Promise.resolve(), (err) => {
