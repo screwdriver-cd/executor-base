@@ -182,18 +182,6 @@ class Executor {
     }
 
     /**
-     * removes information from the timeout queue
-     * @param {*} config
-     */
-    stopTimer(config) {
-        return this._stopTimer(config);
-    }
-
-    async _stopTimer() {
-        // no-op in case no implemented in extenders
-    }
-
-    /**
      * Return statistics on the executor
      * @method stats
      * @return {Object} object           Hash containing metrics for the executor
