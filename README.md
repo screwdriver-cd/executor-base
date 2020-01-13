@@ -94,6 +94,37 @@ Default is no-op
 ##### Expected Return
 A Promise that resolves or rejects.
 
+#### StartTimer
+##### Required Parameters
+| Parameter        | Type  |  Description |
+| :-------------   | :---- | :-------------|
+| config        | Object | Configuration Object |
+| config.annotations | Object | Optional key/value object |
+| config.buildStatus | String | The status of the  build |
+| config.buildId | String | The unique ID for a build |
+| config.startTime | String | ISO start time of the build |
+| config.jobId | String | job id of the build |
+##### Expected Outcome
+The StartTimer function is expected to add buildId as key and timeout config value to timeout queue
+Default is no-op
+
+##### Expected Return
+A Promise that resolves or rejects.
+
+#### StopTimer
+##### Required Parameters
+| Parameter        | Type  |  Description |
+| :-------------   | :---- | :-------------|
+| config        | Object | Configuration Object |
+| config.buildId | String | The unique ID for a build |
+##### Expected Outcome
+The StopTimer function is expected to remove key/value buildId from timeout queue
+Default is no-op
+
+##### Expected Return
+A Promise that resolves or rejects.
+
+
 ## Extending
 To make use of the validation function for start and stop, you need to
 override the `_start` , `_stop` and `_cleanUp` methods.
