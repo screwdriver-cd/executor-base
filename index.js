@@ -188,8 +188,10 @@ class Executor {
 
     /**
      * Removes information from the timeout queue
+     * @method status
      * @param  {Object} config               Configuration
      * @param  {String} config.buildId       Unique ID for a build
+     * @return {Promise}
      */
     stopTimer(config) {
         return this._stopTimer(config);
