@@ -172,7 +172,7 @@ class Executor {
     /**
      * Adds information to the timeout queue
      * @method status
-     * @param  {Object} config               Configuration
+     * @param  {Object} config               Configuration object
      * @param  {String} config.buildId       Unique ID for a build
      * @param  {String} config.startTime     Start time fo build
      * @param  {String} config.buildStatus     Status of build
@@ -189,7 +189,7 @@ class Executor {
     /**
      * Removes information from the timeout queue
      * @method status
-     * @param  {Object} config               Configuration
+     * @param  {Object} config               Configuration object
      * @param  {String} config.buildId       Unique ID for a build
      * @return {Promise}
      */
