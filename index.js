@@ -166,19 +166,39 @@ class Executor {
     }
 
     async _cleanUp() {
-        // no-op in case no implemented in extenders
+        // no-op in case not implemented in extenders
     }
 
     /**
      * Adds information to the timeout queue
-     * @param {Object} config
+     * @method status
+     * @param  {Object} config               Configuration
+     * @param  {String} config.buildId       Unique ID for a build
+     * @param  {String} config.startTime     Start time fo build
+     * @param  {String} config.buildStatus     Status of build
+     * @return {Promise}
      */
     startTimer(config) {
         return this._startTimer(config);
     }
 
     async _startTimer() {
-        // no-op in case no implemented in extenders
+        // no-op in case not implemented in extenders
+    }
+
+    /**
+     * Removes information from the timeout queue
+     * @method status
+     * @param  {Object} config               Configuration
+     * @param  {String} config.buildId       Unique ID for a build
+     * @return {Promise}
+     */
+    stopTimer(config) {
+        return this._stopTimer(config);
+    }
+
+    async _stopTimer() {
+        // no-op in case not implemented in extenders
     }
 
     /**
