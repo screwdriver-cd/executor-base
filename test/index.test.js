@@ -72,7 +72,7 @@ describe('index test', () => {
                 throw new Error('Oh no');
             }, (err) => {
                 assert.isOk(err, 'error is null');
-                assert.equal(err, 'ValidationError: "value" must be an object');
+                assert.equal(err, 'ValidationError: "value" must be of type object');
             })
     ));
 
@@ -92,7 +92,7 @@ describe('index test', () => {
                 throw new Error('Oh no');
             }, (err) => {
                 assert.isOk(err, 'error is null');
-                assert.equal(err, 'ValidationError: "value" must be an object');
+                assert.equal(err, 'ValidationError: "value" must be of type object');
             })
     ));
 
@@ -152,7 +152,7 @@ describe('index test', () => {
                 throw new Error('Oh no');
             }, (err) => {
                 assert.isOk(err, 'error is null');
-                assert.equal(err, 'ValidationError: "value" must be an object');
+                assert.equal(err, 'ValidationError: "value" must be of type object');
             })
     ));
 

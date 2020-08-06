@@ -1,7 +1,6 @@
 'use strict';
 
 /* eslint-disable no-underscore-dangle */
-const Joi = require('joi');
 const dataSchema = require('screwdriver-data-schema');
 const executorSchema = dataSchema.plugins.executor;
 const ANNOTATIONS = [
@@ -28,7 +27,7 @@ const annotationRe = /screwdriver.cd\/(\w+)/;
  * @return {Promise}
  */
 async function validate(config, schema) {
-    const result = Joi.validate(config, schema);
+    const result = schema.validate(config);
 
     if (result.error) {
         throw result.error;
