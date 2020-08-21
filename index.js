@@ -60,8 +60,7 @@ class Executor {
      * @return {Promise}
      */
     start(config) {
-        return validate(config, executorSchema.start)
-            .then(validConfig => this._start(validConfig));
+        return validate(config, executorSchema.start).then(validConfig => this._start(validConfig));
     }
 
     async _start() {
@@ -76,8 +75,7 @@ class Executor {
      * @return {Promise}
      */
     stop(config) {
-        return validate(config, executorSchema.stop)
-            .then(validConfig => this._stop(validConfig));
+        return validate(config, executorSchema.stop).then(validConfig => this._stop(validConfig));
     }
 
     async _stop() {
@@ -85,11 +83,11 @@ class Executor {
     }
 
     /**
-      * Starts a new periodic build in an executor
-      * @method _startPeriodic
-      * @param {Object} config               Configuration
-      * @return {Promise}
-      */
+     * Starts a new periodic build in an executor
+     * @method _startPeriodic
+     * @param {Object} config               Configuration
+     * @return {Promise}
+     */
     startPeriodic(config) {
         return this._startPeriodic(config);
     }
@@ -113,11 +111,11 @@ class Executor {
     }
 
     /**
-      * Starts a new frozen build in an executor
-      * @method _startFrozen
-      * @param {Object} config               Configuration
-      * @return {Promise}
-      */
+     * Starts a new frozen build in an executor
+     * @method _startFrozen
+     * @param {Object} config               Configuration
+     * @return {Promise}
+     */
     startFrozen(config) {
         return this._startFrozen(config);
     }
@@ -148,8 +146,7 @@ class Executor {
      * @return {Promise}
      */
     status(config) {
-        return validate(config, executorSchema.status)
-            .then(validConfig => this._status(validConfig));
+        return validate(config, executorSchema.status).then(validConfig => this._status(validConfig));
     }
 
     async _status() {
@@ -217,7 +214,7 @@ class Executor {
     parseAnnotations(annotations) {
         const parsedAnnotations = {};
 
-        Object.keys(annotations).forEach((key) => {
+        Object.keys(annotations).forEach(key => {
             const parsedKey = key.replace(/^beta./, '');
 
             if (ANNOTATIONS.includes(parsedKey)) {

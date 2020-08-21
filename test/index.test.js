@@ -56,126 +56,139 @@ describe('index test', () => {
         assert.deepEqual(instance.stats(), {});
     });
 
-    it('start returns an error when not overridden', () => (
-        instance.start({})
-            .then(() => {
+    it('start returns an error when not overridden', () =>
+        instance.start({}).then(
+            () => {
                 throw new Error('Oh no');
-            }, (err) => {
+            },
+            err => {
                 assert.isOk(err, 'err is null');
                 assert.equal(err.message, 'Not implemented');
-            })
-    ));
+            }
+        ));
 
-    it('start returns an error when fails validation', () => (
-        instance.start('blah')
-            .then(() => {
+    it('start returns an error when fails validation', () =>
+        instance.start('blah').then(
+            () => {
                 throw new Error('Oh no');
-            }, (err) => {
+            },
+            err => {
                 assert.isOk(err, 'error is null');
                 assert.equal(err, 'ValidationError: "value" must be of type object');
-            })
-    ));
+            }
+        ));
 
-    it('stop returns an error when not overridden', () => (
-        instance.stop({})
-            .then(() => {
+    it('stop returns an error when not overridden', () =>
+        instance.stop({}).then(
+            () => {
                 throw new Error('Oh no');
-            }, (err) => {
+            },
+            err => {
                 assert.isOk(err, 'error is null');
                 assert.equal(err.message, 'Not implemented');
-            })
-    ));
+            }
+        ));
 
-    it('stop returns an error when fails validation', () => (
-        instance.stop('blah')
-            .then(() => {
+    it('stop returns an error when fails validation', () =>
+        instance.stop('blah').then(
+            () => {
                 throw new Error('Oh no');
-            }, (err) => {
+            },
+            err => {
                 assert.isOk(err, 'error is null');
                 assert.equal(err, 'ValidationError: "value" must be of type object');
-            })
-    ));
+            }
+        ));
 
-    it('startPeriodic returns an error when not overridden', () => (
-        instance.startPeriodic({})
-            .then(() => {
+    it('startPeriodic returns an error when not overridden', () =>
+        instance.startPeriodic({}).then(
+            () => {
                 throw new Error('Oh no');
-            }, (err) => {
+            },
+            err => {
                 assert.isOk(err, 'err is null');
                 assert.equal(err.message, 'Not implemented');
-            })
-    ));
+            }
+        ));
 
-    it('stopPeriodic returns an error when not overridden', () => (
-        instance.stopPeriodic({})
-            .then(() => {
+    it('stopPeriodic returns an error when not overridden', () =>
+        instance.stopPeriodic({}).then(
+            () => {
                 throw new Error('Oh no');
-            }, (err) => {
+            },
+            err => {
                 assert.isOk(err, 'error is null');
                 assert.equal(err.message, 'Not implemented');
-            })
-    ));
+            }
+        ));
 
-    it('startFrozen returns an error when not overridden', () => (
-        instance.startFrozen({})
-            .then(() => {
+    it('startFrozen returns an error when not overridden', () =>
+        instance.startFrozen({}).then(
+            () => {
                 throw new Error('Oh no');
-            }, (err) => {
+            },
+            err => {
                 assert.isOk(err, 'err is null');
                 assert.equal(err.message, 'Not implemented');
-            })
-    ));
+            }
+        ));
 
-    it('stopFrozen returns an error when not overridden', () => (
-        instance.stopFrozen({})
-            .then(() => {
+    it('stopFrozen returns an error when not overridden', () =>
+        instance.stopFrozen({}).then(
+            () => {
                 throw new Error('Oh no');
-            }, (err) => {
+            },
+            err => {
                 assert.isOk(err, 'error is null');
                 assert.equal(err.message, 'Not implemented');
-            })
-    ));
+            }
+        ));
 
-    it('status returns an error when not overridden', () => (
-        instance.status({})
-            .then(() => {
+    it('status returns an error when not overridden', () =>
+        instance.status({}).then(
+            () => {
                 throw new Error('Oh no');
-            }, (err) => {
+            },
+            err => {
                 assert.isOk(err, 'error is null');
                 assert.equal(err.message, 'Not implemented');
-            })
-    ));
+            }
+        ));
 
-    it('status returns an error when fails validation', () => (
-        instance.status('blah')
-            .then(() => {
+    it('status returns an error when fails validation', () =>
+        instance.status('blah').then(
+            () => {
                 throw new Error('Oh no');
-            }, (err) => {
+            },
+            err => {
                 assert.isOk(err, 'error is null');
                 assert.equal(err, 'ValidationError: "value" must be of type object');
-            })
-    ));
+            }
+        ));
 
-    it('startTimer does not returns error when not overridden', () => (
-        instance.startTimer()
-            .then(() => Promise.resolve(), (err) => {
+    it('startTimer does not returns error when not overridden', () =>
+        instance.startTimer().then(
+            () => Promise.resolve(),
+            err => {
                 assert.isOk(err, 'error is null');
-            })
-    ));
+            }
+        ));
 
-    it('stopTimer does not returns error when not overridden', () => (
-        instance.stopTimer()
-            .then(() => Promise.resolve(), (err) => {
+    it('stopTimer does not returns error when not overridden', () =>
+        instance.stopTimer().then(
+            () => Promise.resolve(),
+            err => {
                 assert.isOk(err, 'error is null');
-            })
-    ));
+            }
+        ));
 
-    it('cleanUp does not returns error when not overridden', () => (
-        instance.cleanUp()
-            .then(() => Promise.resolve(), (err) => {
+    it('cleanUp does not returns error when not overridden', () =>
+        instance.cleanUp().then(
+            () => Promise.resolve(),
+            err => {
                 assert.isOk(err, 'error is null');
-            })
-    ));
+            }
+        ));
 
     it('parseAnnotations returns a parsed object', () => {
         const parsed = instance.parseAnnotations({
@@ -205,10 +218,12 @@ describe('index test', () => {
 
         assert.instanceOf(bar, Executor);
 
-        return bar.stop({
-            buildId: 'a'
-        }).then((data) => {
-            assert.equal(data.buildId, 'a');
-        });
+        return bar
+            .stop({
+                buildId: 'a'
+            })
+            .then(data => {
+                assert.equal(data.buildId, 'a');
+            });
     });
 });
