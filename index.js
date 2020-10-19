@@ -15,7 +15,8 @@ const ANNOTATIONS = [
     'screwdriver.cd/dockerEnabled',
     'screwdriver.cd/dockerCpu',
     'screwdriver.cd/dockerRam',
-    'screwdriver.cd/nodeLabel'
+    'screwdriver.cd/nodeLabel',
+    'screwdriver.cd/terminationGracePeriodSeconds'
 ];
 const annotationRe = /screwdriver.cd\/(\w+)/;
 
