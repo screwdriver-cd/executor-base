@@ -1,5 +1,5 @@
 # Executor Base
-[![Version][npm-image]][npm-url] ![Downloads][downloads-image] [![Build Status][status-image]][status-url] [![Open Issues][issues-image]][issues-url] [![Dependency Status][daviddm-image]][daviddm-url] ![License][license-image]
+[![Version][npm-image]][npm-url] ![Downloads][downloads-image] [![Build Status][status-image]][status-url] [![Open Issues][issues-image]][issues-url] ![License][license-image]
 
 > Base class defining the interface for executor implementations
 
@@ -173,7 +173,5 @@ Code licensed under the BSD 3-Clause license. See LICENSE file for terms.
 [issues-url]: https://github.com/screwdriver-cd/screwdriver/issues
 [status-image]: https://cd.screwdriver.cd/pipelines/25/badge
 [status-url]: https://cd.screwdriver.cd/pipelines/25
-[daviddm-image]: https://david-dm.org/screwdriver-cd/executor-base.svg?theme=shields.io
-[daviddm-url]: https://david-dm.org/screwdriver-cd/executor-base
 [task]: https://github.com/screwdriver-cd/data-schema/blob/master/model/task.js
 [screwdriver job-tools]: https://github.com/screwdriver-cd/job-tools
