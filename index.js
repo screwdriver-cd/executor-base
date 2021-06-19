@@ -84,6 +84,21 @@ class Executor {
     }
 
     /**
+     * verify if a build is running
+     * @method verify
+     * @param  {Object} config               Configuration
+     * @param  {String} config.buildId       Unique ID for a build
+     * @return {Promise}
+    */
+    verify(config) {
+        return validate(config, executorSchema.verify).then(validConfig => this._verify(validConfig));
+    }
+
+    async _verify() {
+        throw new Error('Not implemented');
+    }
+
+    /**
      * Starts a new periodic build in an executor
      * @method _startPeriodic
      * @param {Object} config               Configuration
@@ -195,6 +210,21 @@ class Executor {
     }
 
     async _stopTimer() {
+        // no-op in case not implemented in extenders
+    }
+
+    /**
+     * Removes current execution of frozen build from queue
+     * @method status
+     * @param  {Object} config               Configuration object
+     * @param  {String} config.buildId       Unique ID for a build
+     * @return {Promise}
+     */
+    skipFrozen(config) {
+        return this._skipFrozen(config);
+    }
+
+    async _skipFrozen() {
         // no-op in case not implemented in extenders
     }
 
