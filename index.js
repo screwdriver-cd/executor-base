@@ -89,7 +89,7 @@ class Executor {
      * @param  {Object} config               Configuration
      * @param  {String} config.buildId       Unique ID for a build
      * @return {Promise}
-    */
+     */
     verify(config) {
         return validate(config, executorSchema.verify).then(validConfig => this._verify(validConfig));
     }
