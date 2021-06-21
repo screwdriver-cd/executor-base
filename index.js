@@ -214,21 +214,6 @@ class Executor {
     }
 
     /**
-     * Removes current execution of frozen build from queue
-     * @method status
-     * @param  {Object} config               Configuration object
-     * @param  {String} config.buildId       Unique ID for a build
-     * @return {Promise}
-     */
-    skipFrozen(config) {
-        return this._skipFrozen(config);
-    }
-
-    async _skipFrozen() {
-        // no-op in case not implemented in extenders
-    }
-
-    /**
      * Return statistics on the executor
      * @method stats
      * @return {Object} object           Hash containing metrics for the executor
