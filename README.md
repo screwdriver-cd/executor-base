@@ -54,6 +54,23 @@ The stop function is expected to stop/cleanup a [task] in the execution engine.
 ##### Expected Return
 A Promise that resolves if the task is cleaned up correctly, or rejects if it fails.
 
+#### Verify
+##### Required Parameters
+| Parameter        | Type  |  Description |
+| :-------------   | :---- | :-------------|
+| config        | Object | Configuration Object |
+| config.annotations | Object | Optional key/value object |
+| config.apiUri | String | Screwdriver's API |
+| config.buildId | String | The unique ID for a build |
+| config.container | String | Container for the build to run in |
+| config.token | String | Temporary JWT which Executor must exchange with API to get JWT which can act on behalf of the build |
+
+##### Expected Outcome
+The verify function is expected to check the pods health and status.
+
+##### Expected Return
+A Promise that resolves and returns the message for pod health error or success.
+
 #### Status
 ##### Required Parameters
 | Parameter        | Type  |  Description |

@@ -26,7 +26,8 @@ describe('index test', () => {
                     stopPeriodic: Joi.object().required(),
                     startFrozen: Joi.object().required(),
                     stopFrozen: Joi.object().required(),
-                    status: Joi.object().required()
+                    status: Joi.object().required(),
+                    verify: Joi.object().required()
                 }
             }
         };
@@ -69,6 +70,28 @@ describe('index test', () => {
 
     it('start returns an error when fails validation', () =>
         instance.start('blah').then(
+            () => {
+                throw new Error('Oh no');
+            },
+            err => {
+                assert.isOk(err, 'error is null');
+                assert.equal(err, 'ValidationError: "value" must be of type object');
+            }
+        ));
+
+    it('verify returns an error when not overridden', () =>
+        instance.verify({}).then(
+            () => {
+                throw new Error('Oh no');
+            },
+            err => {
+                assert.isOk(err, 'err is null');
+                assert.equal(err.message, 'Not implemented');
+            }
+        ));
+
+    it('verify returns an error when fails validation', () =>
+        instance.verify('blah').then(
             () => {
                 throw new Error('Oh no');
             },
