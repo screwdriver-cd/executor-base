@@ -95,7 +95,7 @@ class Executor {
     }
 
     async _verify() {
-        throw new Error('Not implemented');
+        // no-op in case not implemented in extenders
     }
 
     /**
