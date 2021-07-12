@@ -79,14 +79,13 @@ describe('index test', () => {
             }
         ));
 
-    it('verify returns an error when not overridden', () =>
+    it('verify does not return an error when not overridden', () =>
         instance.verify({}).then(
-            () => {
-                throw new Error('Oh no');
+            message => {
+                assert.equal(message, undefined);
             },
-            err => {
-                assert.isOk(err, 'err is null');
-                assert.equal(err.message, 'Not implemented');
+            () => {
+                throw new Error('should not fail');
             }
         ));
 
