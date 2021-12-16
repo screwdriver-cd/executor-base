@@ -229,6 +229,17 @@ describe('index test', () => {
         });
     });
 
+    it('unzipArtifacts returns an error when not overridden', () =>
+        instance.unzipArtifacts({}).then(
+            () => {
+                throw new Error('Oh no');
+            },
+            err => {
+                assert.isOk(err, 'error is null');
+                assert.equal(err.message, 'Not implemented');
+            }
+        ));
+
     it('can be extended', () => {
         class Foo extends Executor {
             _stop(config) {
