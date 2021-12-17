@@ -245,7 +245,8 @@ class Executor {
     /**
      * Unzip the ZIP of artifacts
      * @method unzipArtifacts
-     * @param  {Object} config       Configuration
+     * @param  {Object}  config           Configuration
+     * @param  {Integer} config.buildId   Unique ID for a build
      * @return {Promise}
      */
     unzipArtifacts(config) {
