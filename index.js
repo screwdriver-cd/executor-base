@@ -241,6 +241,21 @@ class Executor {
 
         return parsedAnnotations;
     }
+
+    /**
+     * Unzip the ZIP of artifacts
+     * @method unzipArtifacts
+     * @param  {Object}  config           Configuration
+     * @param  {Number}  config.buildId   Unique ID for a build
+     * @return {Promise}
+     */
+    unzipArtifacts(config) {
+        return this._unzipArtifacts(config);
+    }
+
+    async _unzipArtifacts() {
+        throw new Error('Not implemented');
+    }
 }
 
 module.exports = Executor;
