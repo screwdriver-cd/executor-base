@@ -256,6 +256,20 @@ class Executor {
     async _unzipArtifacts() {
         throw new Error('Not implemented');
     }
+
+    /**
+     * Enqueue webhookConfig to queue service
+     * @method enqueueWebhook
+     * @param  {Object}  config           Configuration
+     * @return {Promise}
+     */
+    enqueueWebhook(config) {
+        return this._enqueueWebhook(config);
+    }
+
+    async _enqueueWebhook() {
+        throw new Error('Not implemented');
+    }
 }
 
 module.exports = Executor;
