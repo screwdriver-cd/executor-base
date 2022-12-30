@@ -13,7 +13,7 @@
     "url": "git+https://github.com/screwdriver-cd/executor-base.git"
   },
   "homepage": "https://github.com/screwdriver-cd/executor-base",
-  "bugs": "https://github.com/screwdriver-cd/executor-base/issues",
+  "bugs": "https://github.com/screwdriver-cd/screwdriver/issues",
   "keywords": [
     "screwdriver",
     "yahoo"
@@ -48,7 +48,6 @@
   },
   "dependencies": {
     "joi": "^17.7.0",
-    "jsonwebtoken": "^8.5.1",
     "screwdriver-data-schema": "^22.0.1"
   }
 }
