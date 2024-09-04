@@ -1,6 +1,6 @@
 {
   "name": "screwdriver-executor-base",
-  "version": "9.0.0",
+  "version": "10.0.0",
   "description": "Base class defining the interface for executor implementations",
   "main": "index.js",
   "scripts": {
