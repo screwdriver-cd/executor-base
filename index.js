@@ -15,6 +15,9 @@ const ANNOTATIONS = [
     'screwdriver.cd/dockerEnabled',
     'screwdriver.cd/dockerCpu',
     'screwdriver.cd/dockerRam',
+    'screwdriver.cd/rootlessBuildkitEnabled',
+    'screwdriver.cd/buildkitCpu',
+    'screwdriver.cd/buildkitRam',
     'screwdriver.cd/nodeLabel',
     'screwdriver.cd/terminationGracePeriodSeconds'
 ];
